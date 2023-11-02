@@ -14,9 +14,6 @@ import com.studartrh.fuel.repository.PumpRepository;
 @Service
 public class PumpService {
 	
-	private static String UNKNOWN_ERROR  = "UNKNOWN_ERROR";
-	private static String DUPLICATED_KEY = "DUPLICATED_KEY";
-	
 	@Autowired
 	private PumpRepository repository;
 	
@@ -38,44 +35,5 @@ public class PumpService {
 		} catch (Exception e) {
 			return ResponseEntity.noContent().build();
 		}
-	}
-	
-	public ResponseEntity<PumpDTO> save(PumpDTO data) {
-
-		try {
-			Pump pump = new Pump(data);
-			PumpDTO resp = new PumpDTO(repository.save(pump));	
-			return ResponseEntity.ok(resp);
-		} catch (DataIntegrityViolationException e) {
-			System.out.println(e.getMessage()); 
-		} catch (Exception e) {
-			System.out.println(e.getMessage());
-		}
-		return null;
-	}
-	
-	public ResponseEntity<PumpDTO> update(Long id) {
-		
-		try {
-			Pump pump = repository.findById(id).get();
-			PumpDTO resp = new PumpDTO(repository.save(pump));
-			return ResponseEntity.ok(resp);
-		} catch (DataIntegrityViolationException e) {
-			System.out.println(e.getMessage());
-		} catch (Exception e) {
-			System.out.println(e.getMessage());
-		}
-		return null;
-	}
-	
-	public ResponseEntity<PumpDTO> delete(Long id) {
-		
-		try {
-			Pump pump = repository.findById(id).get();
-			repository.delete(pump);
-		} catch (Exception e) {
-			System.out.println(e.getMessage());
-		}
-		return null;
 	}
 }

@@ -2,8 +2,6 @@ package com.studartrh.fuel.entity;
 
 import java.util.List;
 
-import com.studartrh.fuel.dto.PumpDTO;
-
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -11,6 +9,8 @@ import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
@@ -26,19 +26,15 @@ public class Pump {
 	@Column(name = "name")
 	private String name;
 	
-	@Column(name = "tank")
-	private Integer tank;
-	
 	@OneToMany(mappedBy = "pump", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private List<Fueling> fuelings;
 	
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "tank_id")
+	private Tank tank;
+	
 	public Pump() {
 		
-	}
-	
-	public Pump(PumpDTO dto) {
-		this.name = dto.name();
-		this.tank = dto.tank();
 	}
 
 	public Long getId() {
@@ -57,11 +53,11 @@ public class Pump {
 		this.name = name;
 	}
 
-	public Integer getTank() {
+	public Tank getTank() {
 		return tank;
 	}
 
-	public void setTank(Integer tank) {
+	public void setTank(Tank tank) {
 		this.tank = tank;
 	}
 
@@ -72,6 +68,4 @@ public class Pump {
 	public void setFuelings(List<Fueling> fuelings) {
 		this.fuelings = fuelings;
 	}
-		
-	
 }

@@ -24,29 +24,15 @@ public class PumpController {
 
 	@Autowired
 	private PumpService service;
-
+	
 	@GetMapping("")
+	@CrossOrigin(origins = "*", allowedHeaders = "*", methods = RequestMethod.GET)
 	public ResponseEntity<List<PumpDTO> > getAll() {
 		return service.getAll();
 	}
-	
 	@GetMapping(value = "/{id}")	
 	public ResponseEntity<PumpDTO> get(@PathVariable("id") Long id) {     
 		return service.get(id);
 	}
-	
-	@PostMapping(value = "/pumps")
-	public ResponseEntity<PumpDTO> save(@RequestBody PumpDTO data) {
-		return service.save(data);
-	}
-	
-	@PutMapping(value = "/pumps/{id}")
-	public ResponseEntity<PumpDTO> update(@PathVariable("id") Long id, @RequestBody PumpDTO data) {
-		return service.update(id);
-	}
-	
-	@DeleteMapping(value = "/pumps/{id}")
-	public ResponseEntity<PumpDTO> delete(@PathVariable("id") Long id) {
-		return service.delete(id);
-	}
+
 }
