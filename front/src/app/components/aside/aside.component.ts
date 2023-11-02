@@ -54,7 +54,6 @@ export class AsideComponent implements OnInit {
   requestTotals() {
     this.fuelingService.totals().subscribe({
       next: (totals: any) => {
-        console.log("Totals", JSON.stringify(totals));
         //--------- Gasoline totals ----------------
         this.gTodayQuantity = totals.gTodayQuantity;
         this.gMonthQuantity = totals.gMonthQuantity;

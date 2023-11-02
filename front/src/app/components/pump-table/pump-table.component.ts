@@ -24,8 +24,6 @@ export class PumpTableComponent {
   }
 
   showAlertMessage() {
-    //this.message = 'Função ainda não implementada neste MVP!';
-    console.log('showNotImplementedAlert')
     this.showEvent.emit();
   }
 }

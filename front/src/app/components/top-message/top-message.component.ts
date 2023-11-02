@@ -21,7 +21,6 @@ export class TopMessageComponent {
     this.messageHeight = "4.5em";   
     this.message = message;
     let t = setTimeout(() => {
-      console.log("Timeout over: " + this.message);
       this.setMessageFading();
       this.fading = 100;
     }, time);

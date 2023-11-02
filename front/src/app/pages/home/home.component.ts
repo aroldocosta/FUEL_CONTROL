@@ -8,7 +8,6 @@ import { FuelingsService } from 'src/app/services/fuelings.service';
 import { LoginService } from 'src/app/services/login.service';
 import { PumpService } from 'src/app/services/pump.service';
 
-console.log
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -54,7 +53,6 @@ export class HomeComponent implements OnInit{
 
   setPumpList(list: Pump[]) {
     this.pumpList = list;
-    console.log("Pump list: ", list);
   }
 
   setTankList(list: Tank[]) {

@@ -56,8 +56,4 @@ export class LoginComponent implements OnInit {
     //     }
     //  });
   }
-
-  setName(t: string, d:string) {
-    console.log("T -> " + t + " D => " + d);
-  }
 }

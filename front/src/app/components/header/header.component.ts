@@ -55,19 +55,9 @@ export class HeaderComponent implements OnInit{
 
   requestTanks() {
     this.tankService.list().subscribe(list => {
-      for(let t of list) {
-        console.log(t.fuel);
-      }
       this.tankEvent.emit(list);
     })
   }
-
-  // sendPumpListToParent(list: Pump[]) {
-  //   for(let l of list) {
-  //     console.log(l.name);
-  //   }
-  //   this.pumpEventsendPumpList.emit(list);
-  // }
 
   getId() {
     return this.login.getAuthId();
@@ -77,25 +67,11 @@ export class HeaderComponent implements OnInit{
     return this.login.getAuthToken();
   }
 
-  // override isAuthenticated() {
-    // return this.login.isAuthenticated();
-  // }
-
   isAuthenticated() {
     return !true;
   }
 
-  contact() {
-    // this.goToLink("/contact", this.login, this.router);
-  }
 
-  about() {
-    // this.goToLink("/about", this.login, this.router);
-  }
-
-  test() {
-    // this.goToLink("/test", this.login, this.router);
-  }
 
   loginForm() {
     // this.goToLink("/login", this.login, this.router);
@@ -103,10 +79,6 @@ export class HeaderComponent implements OnInit{
 
   logout() {
     // this.goToLink("/logout", this.login, this.router);
-  }
-
-  list() {
-    // this.goToLink("/users/list", this.login, this.router);
   }
 
   userData() {

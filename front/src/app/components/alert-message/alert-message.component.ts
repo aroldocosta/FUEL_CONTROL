@@ -14,7 +14,6 @@ export class AlertMessageComponent {
     constructor() {}
 
     emitClearEvent() {
-      console.log('emitClearEvent!');
       this.clearEvent.emit();
     }
 }
