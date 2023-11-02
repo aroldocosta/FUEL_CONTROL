@@ -1,0 +1,47 @@
+<nav class="navbar navbar-expand-md navbar-light bg-light" aria-label="Fourth navbar example">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="/">
+      <img class="top-logo-img" src="assets/img/logo.png">
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsExample04" 
+        aria-controls="navbarsExample04" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarsExample04">
+      <ul class="navbar-nav me-auto mb-2 mb-md-0">
+        <li class="nav-item">
+          <a class="a-link nav-link px-2 text-secondary" data-bs-target="#pumpModalToggle" data-bs-toggle="modal" (click)="requestPumps()">
+            <i class="bi bi-fuel-pump"></i> BOMBAS</a>
+        </li>
+        <li class="nav-item">
+          <a class="a-link nav-link px-2 text-secondary" data-bs-target="#tankModalToggle" data-bs-toggle="modal" (click)="requestTanks()">
+            <i class="bi bi-droplet-half"></i> TANQUES</a>            
+        </li>
+        <li class="nav-item">
+          <a class="a-link nav-link px-2 text-secondary" data-bs-target="#reportModalToggle" data-bs-toggle="modal">
+            <i class="bi bi-card-checklist"></i> RELATÓRIOS</a>
+        </li>
+      </ul>
+      <div class="nav-item dropdown">
+        <a class="a-link nav-link px-2 text-secondary" (click)="loginForm()">
+          <i class="bi bi-box-arrow-in-right"></i> Login
+        </a>
+      </div>
+      <div class="nav-item dropdown"  *ngIf="isAuthenticated()">
+        <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" aria-expanded="false">
+            <span *ngIf="logged">Olá, {{logged.name}}</span>
+        </a>
+        <ul class="dropdown-menu">
+          <li><a class="dropdown-item a-link" (click)="userData()">
+            <i class="bi bi-person"></i> Meus dados</a></li>
+          <li><a class="a-link dropdown-item" (click)="logout()">
+            <i class="bi bi-box-arrow-right"></i> Sair</a></li>
+        </ul>
+      </div>
+      <div *ngIf="isAuthenticated()" class="hide-large">
+         <app-aside></app-aside>
+      </div>
+    </div>
+  </div>
+</nav>

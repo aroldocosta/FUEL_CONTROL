@@ -1,0 +1,99 @@
+<div class="hide-small">
+ 	<div class="thumbnail">
+		<div class="form-group side-logo-img">
+			<a href="/">
+	 	    	<div>
+				    <img src="assets/img/logo.png" alt="Logomarca">
+				</div>
+			</a>
+		</div>
+	</div>
+	<div>	
+		<div class="card gasoline">
+			<div class="card-body">
+			  <h2 class="gasoline">GASOLINA</h2>
+			  <p>(Preço unit: {{gUnitPrice | currency: 'BRL'}})</p>	
+			  <table class="table table-sm  table-striped">
+				<thead>
+				  <tr>
+					<th scope="col"></th>
+					<th scope="col">HOJE</th>
+					<th scope="col">NO MÊS</th>
+					<th scope="col">NO ANO</th>
+				  </tr>
+				</thead>
+				<tbody>
+				  <tr>
+					<th scope="row" title="Volume vendido">Vol:</th>
+					<td>{{gTodayQuantity | number: '1.2'}}</td>
+					<td>{{gMonthQuantity | number: '1.2'}}</td>
+					<td>{{gYearQuantity  | number: '1.2'}}</td>
+				  </tr>
+				  <tr>
+					<th scope="row" title="Valor faturado">Fat:</th>
+					<td>{{gTodayAmount | currency: 'BRL'}}</td>
+					<td>{{gMonthAmount | currency: 'BRL'}}</td>
+					<td>{{gYearAmount  | currency: 'BRL'}}</td>
+				  </tr>				  
+				</tbody>
+			  </table>
+			</div>
+			<div class="card-body">
+			  <h2 class="diesel">DIESEL</h2>
+			  <p>(Preço unit: {{dUnitPrice | currency: 'BRL'}})</p>	
+			  <table class="table table-sm  table-striped">
+				<thead>
+				  <tr>
+					<th scope="col"></th>
+					<th scope="col">HOJE</th>
+					<th scope="col">NO MÊS</th>
+					<th scope="col">NO ANO</th>
+				  </tr>
+				</thead>
+				<tbody>
+				  <tr>
+					<th scope="row" title="Volume vendido em litros">Vol:</th>
+					<td>{{dTodayQuantity | number: '1.2'}}</td>
+					<td>{{dMonthQuantity | number: '1.2'}}</td>
+					<td>{{dYearQuantity  | number: '1.2'}}</td>
+				  </tr>
+				  <tr>
+					<th scope="row" title="Valor faturado em Reais">Fat:</th>
+					<td>{{dTodayAmount | currency: 'BRL'}}</td>
+					<td>{{dMonthAmount | currency: 'BRL'}}</td>
+					<td>{{dYearAmount  | currency: 'BRL'}}</td>
+				  </tr>				  
+				</tbody>
+			  </table>
+			</div>
+			<div class="card-body">
+			  <h2 class="diesel">TOTAL</h2>	
+			  <p>(Totais gasolina + diesel)</p>	
+			  <table class="table table-sm  table-striped">
+				<thead>
+				  <tr>
+					<th scope="col"></th>
+					<th scope="col">HOJE</th>
+					<th scope="col">NO MÊS</th>
+					<th scope="col">NO ANO</th>
+				  </tr>
+				</thead>
+				<tbody>
+				  <tr>
+					<th scope="row" title="Volume vendido">Vol:</th>
+					<td>{{tTodayQuantity | number: '1.2'}}</td>
+					<td>{{tMonthQuantity | number: '1.2'}}</td>
+					<td>{{tYearQuantity  | number: '1.2'}}</td>
+				  </tr>
+				  <tr>
+					<th scope="row" title="Valor faturado">Fat:</th>
+					<td>{{tTodayAmount | currency: 'BRL'}}</td>
+					<td>{{tMonthAmount | currency: 'BRL'}}</td>
+					<td>{{tYearAmount  | currency: 'BRL'}}</td>
+				  </tr>				  
+				</tbody>
+			  </table>
+			</div>
+		</div>
+	</div>
+</div>		
