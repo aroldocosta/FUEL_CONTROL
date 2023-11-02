@@ -1,0 +1,24 @@
+<div class="table-responsive">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>BOMBA</th>
+                <th title="Tipo de combustíve / numero do tanque">COMB/TANQ</th>
+                <th>EDITAR</th>
+                <th>REMOVER</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let pump of list">
+                <td>{{pump.name}}</td>	
+                <td>{{pump.tank}}</td>
+                <td><a (click)="showAlertMessage()"><i class="bi bi-pencil-square icon"></i></a></td>
+                <td><a (click)="showAlertMessage()" title="Excluir"><i class="bi bi-trash3 icon"></i></a></td>
+            </tr>
+        </tbody>
+    </table>
+    <app-alert-message 
+        [message]="message"
+        (clearEvent)="clearAlertMessage()"
+    ></app-alert-message>
+</div>

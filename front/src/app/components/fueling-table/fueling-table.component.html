@@ -1,0 +1,28 @@
+<div class="table-responsive">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>DATA</th>
+                <th>BOMBA</th>
+                <th title="Tipo de combustíve / numero do tanque">COMB/TANQ</th>
+                <th>QUATIDADE</th>
+                <th>TRIBUTAÇÃO</th>
+                <th>TOTAL</th>
+                <th>EDITAR</th>
+                <th>REMOVER</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let f of tableData">
+                <td>{{f.date}}</td>	
+                <td>{{f.pump}}</td>
+                <td>{{f.tank}}</td>
+                <td>{{f.quantity  | currency: 'BRL'}}</td>								
+                <td>{{f.taxation  | currency: 'BRL'}}</td>
+                <td>{{f.total     | currency: 'BRL'}}</td>
+                <td><a (click)="emitEditEvent(f)"><i class="bi bi-pencil-square icon"></i></a></td>
+                <td><a (click)="emitRemoveEvent(f)" title="Excluir" data-bs-toggle="modal" data-bs-target="#staticBackdrop"><i class="bi bi-trash3 icon"></i></a></td>
+            </tr>
+        </tbody>
+    </table>
+</div>

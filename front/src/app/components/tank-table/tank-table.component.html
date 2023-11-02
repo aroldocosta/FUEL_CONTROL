@@ -1,0 +1,26 @@
+<div class="table-responsive">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>COMBUSTIVEL</th>
+                <th>PREÇO UNIT</th>
+                <th>IMPOSTO</th>
+                <th>REMOVER</th>
+                <th>EDITAR</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let tank of list">
+                <td>{{tank.fuel}}</td>	
+                <td>{{tank.unitPrice | currency: 'BRL'}}</td>
+                <td>{{tank.tax}}%</td>
+                <td><a (click)="showAlertMessage()"><i class="bi bi-pencil-square icon"></i></a></td>
+                <td><a (click)="showAlertMessage()" title="Excluir"><i class="bi bi-trash3 icon"></i></a></td>
+            </tr>
+        </tbody>
+    </table>
+    <app-alert-message 
+        [message]="message"
+        (clearEvent)="clearAlertMessage()"
+    ></app-alert-message>
+</div>
