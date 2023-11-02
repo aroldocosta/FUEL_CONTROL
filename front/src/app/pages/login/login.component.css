@@ -1,0 +1,16 @@
+input {
+    margin-bottom: 1em;
+}
+
+h3 {
+    color: lightgrey;
+}
+
+.container {
+   padding-top: 5vh; 
+   height: 80vh;
+}
+
+.container img {
+    width: 4em;
+}

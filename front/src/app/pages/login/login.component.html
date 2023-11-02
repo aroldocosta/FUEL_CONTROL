@@ -1,0 +1,60 @@
+<app-header></app-header>
+<div class="container">
+	<div class="row">
+	    <div class="col-sm-12 col-lg-6 offset-lg-3 offset-sm-0">
+			<h3 class="label">Login</h3>
+			<form  [formGroup]="loginForm" #formDir="ngForm" (ngSubmit)="onSubmit()">
+				<app-top-message></app-top-message>
+				<hr class="colorgraph">
+				<div class="form-group">
+					<input 
+						type="email" 
+						class="form-control" 
+						placeholder="Email" 
+						formControlName="login"
+						required>
+				</div>
+				<div *ngIf="login?.invalid && formDir.submitted" class="validation-error">
+					<p>Este campo é obrigatorio</p>
+				</div>
+				<div class="form-group">
+					<input 
+						type="password" 
+						class="form-control" 
+						placeholder="Senha"
+						formControlName="password"
+						required>
+				</div>
+				<div *ngIf="password?.invalid && formDir.submitted" class="validation-error">
+					<p>Este campo é obrigatorio</p>
+				</div>
+				<hr class="colorgraph">
+				<input 
+					type="submit" 
+					value="Entrar"	
+					class="form-control btn btn-outline-info btn-block btn-lg" 
+					tabindex="4">
+			</form>
+		</div>
+    </div>
+</div>
+<app-footer></app-footer>
+
+<!--
+
+					<div id="" class="form-group">
+				<input type="email" autofocus="autofocus" [(ngModel)]="user.login"
+					class="form-control input-lg" placeholder="Email" tabindex="1">
+					<input type="password" [(ngModel)]="user.password"  
+						class="form-control input-lg" placeholder="Senha" tabindex="2">				
+					<hr class="colorgraph">
+					<div class="row">
+						<div class="col-12">
+							<input type="submit" value="Entrar" (click)="requestLogin()"
+							class="form-control btn btn-outline-info btn-block btn-lg" tabindex="4">
+						</div>
+					</div>
+				</div>
+
+ -->
+        
