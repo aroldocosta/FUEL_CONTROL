@@ -1,0 +1,248 @@
+<app-header 
+	(pumpEvent)="setPumpList($event)"
+	(tankEvent)="setTankList($event)"
+></app-header>
+ <div class="container-fluid">
+	<input id="page_id" type="hidden" value="home_admin">
+	<input id="base_url" type="hidden" value="/" >
+
+   <div class="row">
+	   <div class="col-md-3">
+		   <app-aside class="hide-small"></app-aside>
+	   </div>
+	   <div class="col-sm-0 col-md-9">
+			<section class="right-content">
+				<div class="row">
+					<div class="col-md-6">
+						<h2>ABASTECIMENTOS</h2>
+					</div>
+					<div class="col-md-6">
+						<div class="row">
+							<div class="col-md-6 small">
+								<label>DATA</label>
+								<div class="input-group mb-3">
+									<div class="input-group-text">
+									  <input class="form-check-input mt-0" type="checkbox" [(ngModel)]="enabledDate" 
+									  	aria-label="Checkbox" title="Seleciona todas as datas" (change)="filterFueling()">
+									</div>
+									<input type="date" class="form-control" aria-describedby="basic-addon1" [disabled]="enabledDate"
+										(change)="filterFueling()" [ngModel]="filteredDate | date:'yyyy-MM-dd'" (ngModelChange)="filteredDate = $event" >
+								  </div>
+							</div>
+							<div class="col-md-6 small">
+								<label for="">TANQUE</label>
+								<select class="form-select" aria-label="Default select example" [(ngModel)]="filteredTank" (change)="filterFueling()">
+									<option value="ALL"selected>TODOS</option>
+									<option value="DIESEL">DIESEL</option>
+									<option value="GASOLINE">GASOLINA</option>
+								</select>
+							</div>
+						</div>
+					</div>	
+				</div>
+				<div class="col-sm-12 large">
+					<div class="row">	
+						<div class="col-md-3 small-check">
+							<div class="form-check form-check-inline">
+								<input class="form-check-input" type="checkbox" [(ngModel)]="filteredPumps[0].checked" (click)="setFilteredPump(0)"/>
+								<label class="form-check-label" for="inlineCheckbox1">BOMBA1</label>
+							</div>
+						</div>
+						<div class="col-md-3 small-check">	
+							<div class="form-check form-check-inline">
+								<input class="form-check-input" type="checkbox" [(ngModel)]="filteredPumps[1].checked" (click)="setFilteredPump(1)"/>
+								<label class="form-check-label" for="inlineCheckbox1">BOMBA2</label>
+							</div>
+						</div>		
+						<div class="col-md-3 small-check">
+							<div class="form-check form-check-inline">
+								<input class="form-check-input" type="checkbox" [(ngModel)]="filteredPumps[2].checked" (click)="setFilteredPump(2)"/>
+								<label class="form-check-label" for="inlineCheckbox1">BOMBA3</label>
+							</div>
+						</div>
+						<div class="col-md-3 small-check">
+							<div class="form-check form-check-inline">
+								<input class="form-check-input" type="checkbox" [(ngModel)]="filteredPumps[3].checked" (click)="setFilteredPump(3)"/>
+								<label class="form-check-label" for="inlineCheckbox1">BOMBA4</label>
+							</div>
+						</div>
+					</div>
+				</div>	
+				<hr class="colorgraph">
+				<div class="table-responsive">
+					<table class="table table-striped">
+					<thead>
+					<tr>
+						<th>DATA</th>
+						<th>BOMBA</th>
+						<th title="Tipo de combustíve / numero do tanque">COMB/TANQ</th>
+						<th>QUATIDADE</th>
+						<th>TRIBUTAÇÃO</th>
+						<th>TOTAL</th>
+						<th>EDITAR</th>
+						<th>REMOVER</th>
+					</tr>
+					</thead>
+					<tbody>
+					<tr *ngFor="let f of filteredList">
+						<td>{{f.date}}</td>	
+						<td>{{f.pump}}</td>
+						<td>{{f.tank}}</td>
+						<td>{{f.quantity | currency: 'BRL'}}</td>								
+						<td>{{f.taxation  | currency: 'BRL'}}</td>
+						<td>{{f.total     | currency: 'BRL'}}</td>
+						<td><a (click)="edit(fueling)"><i class="bi bi-pencil-square icon"></i></a></td>
+						<td><a (click)="openModal(fueling)" title="Excluir" data-bs-toggle="modal" data-bs-target="#staticBackdrop"><i class="bi bi-trash3 icon"></i></a></td>
+					</tr>
+					</tbody>
+				</table>
+				</div>
+				{{filteredPumps[0].pump}} - {{filteredPumps[1].pump}} - {{filteredPumps[2].pump}} - {{filteredPumps[3].pump}}
+				<hr class="colorgraph">
+				<div>
+					<button (click)="new()" class="btn btn-outline-info btn-block btn-right" tabindex="12">REGISTRAR ABASTECIMENTO</button>
+				</div>
+			</section>
+	   </div>
+   </div>
+   <div class="modal fade" id="pumpModalToggle" aria-labelledby="pumpModalToggleLabel" tabindex="-1" aria-hidden="true" style="display: none;">
+	<div class="modal-dialog modal-xl">
+	  <div class="modal-content">
+		<div class="modal-header">
+		  <h1 class="modal-title fs-5" id="exampleModalToggleLabel">BOMBAS</h1>
+		  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+		</div>
+		<div class="modal-body">
+			<hr class="colorgraph">
+			<div class="table-responsive">
+				<table class="table table-striped">
+					<thead>
+						<tr>
+							<th>BOMBA</th>
+							<th title="Tipo de combustíve / numero do tanque">COMB/TANQ</th>
+							<th>EDITAR</th>
+							<th>REMOVER</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr *ngFor="let pump of pumpList">
+							<td>{{pump.name}}</td>	
+							<td>{{pump.tank}}</td>
+							<td><a (click)="showNotImplementedAlert()"><i class="bi bi-pencil-square icon"></i></a></td>
+							<td><a (click)="showNotImplementedAlert()" title="Excluir"><i class="bi bi-trash3 icon"></i></a></td>
+						</tr>
+					</tbody>
+				</table>
+				<div id="liveAlertPlaceholder" *ngIf="alertMessage.length > 0">
+					<div>
+						<div class="alert alert-warning alert-dismissible" role="alert">   
+							<div>{{alertMessage}}</div>   
+							<button type="button" class="btn-close" aria-label="Close" (click)="clearAlertMessage()"></button>
+						</div>
+					</div>				
+				</div>
+			</div>
+			<hr class="colorgraph">
+		</div>
+		<div class="modal-footer">
+		  <button class="btn btn-outline-primary btn-modal" (click)="showNotImplementedAlert()">CADASTRAR BOMBA</button>
+		</div>
+	  </div>
+	</div>
+  </div>
+  <div class="modal fade" id="tankModalToggle" aria-labelledby="tankModalToggleLabel" tabindex="-1" aria-hidden="true" style="display: none;">
+	<div class="modal-dialog modal-xl">
+	  <div class="modal-content">
+		<div class="modal-header">
+		  <h1 class="modal-title fs-5" id="tankModalToggleLabel">TANQUES</h1>
+		  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+		</div>
+		<div class="modal-body">
+			<hr class="colorgraph">
+			<div class="table-responsive">
+				<table class="table table-striped">
+					<thead>
+						<tr>
+							<th>COMBUSTIVEL</th>
+							<th>PREÇO UNIT</th>
+							<th>IMPOSTO</th>
+							<th>REMOVER</th>
+							<th>EDITAR</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr *ngFor="let tank of tankList">
+							<td>{{tank.fuel}}</td>	
+							<td>{{tank.unitPrice | currency: 'BRL'}}</td>
+							<td>{{tank.tax}}%</td>
+							<td><a (click)="showNotImplementedAlert()"><i class="bi bi-pencil-square icon"></i></a></td>
+							<td><a (click)="showNotImplementedAlert()"><i class="bi bi-trash3 icon"></i></a></td>
+						</tr>
+					</tbody>
+				</table>
+				<div id="liveAlertPlaceholder" *ngIf="alertMessage.length > 0">
+					<div>
+						<div class="alert alert-warning alert-dismissible" role="alert">   
+							<div>{{alertMessage}}</div>   
+							<button type="button" class="btn-close" aria-label="Close" (click)="clearAlertMessage()"></button>
+						</div>
+					</div>				
+				</div>
+			</div>
+			<hr class="colorgraph">
+		</div>
+		<div class="modal-footer">
+		  <button class="btn btn-outline-primary btn-modal" (click)="showNotImplementedAlert()">CADASTRAR TANQUE</button>
+		</div>
+	  </div>
+	</div>
+  </div>
+  <div class="modal fade" id="reportModalToggle" aria-labelledby="reportModalToggleLabel" tabindex="-1" aria-hidden="true" style="display: none;">
+	<div class="modal-dialog modal-xl">
+	  <div class="modal-content">
+		<div class="modal-header">
+		  <h1 class="modal-title fs-5" id="reportModalToggleLabel">RELATÓRIOS</h1>
+		  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+		</div>
+		<div class="modal-body">
+			<hr class="colorgraph">
+			<div class="table-responsive">
+				<table class="table table-striped">
+					<thead>
+						<tr>
+							<th>COMBUSTIVEL</th>
+							<th>PREÇO UNIT</th>
+							<th>IMPOSTO</th>
+							<th>REMOVER</th>
+							<th>EDITAR</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr *ngFor="let tank of tankList">
+							<td>{{tank.fuel}}</td>	
+							<td>{{tank.unitPrice | currency: 'BRL'}}</td>
+							<td>{{tank.tax}}%</td>
+							<td><a (click)="showNotImplementedAlert()"><i class="bi bi-pencil-square icon"></i></a></td>
+							<td><a (click)="showNotImplementedAlert()"><i class="bi bi-trash3 icon"></i></a></td>
+						</tr>
+					</tbody>
+				</table>
+				<div id="liveAlertPlaceholder" *ngIf="alertMessage.length > 0">
+					<div>
+						<div class="alert alert-warning alert-dismissible" role="alert">   
+							<div>{{alertMessage}}</div>   
+							<button type="button" class="btn-close" aria-label="Close" (click)="clearAlertMessage()"></button>
+						</div>
+					</div>				
+				</div>
+			</div>
+			<hr class="colorgraph">
+		</div>
+		<div class="modal-footer">
+		  <button class="btn btn-outline-primary btn-modal" (click)="showNotImplementedAlert()">CADASTRAR TANQUE</button>
+		</div>
+	  </div>
+	</div>
+  </div>
+</div>
+<app-footer></app-footer>
