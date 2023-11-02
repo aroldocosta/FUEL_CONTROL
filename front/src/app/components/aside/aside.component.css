@@ -1,0 +1,51 @@
+/* @media(max-width:768px) {
+	.sideMenu {
+		display: none;
+	}
+	.topMenu {
+		display: block;
+	}
+}
+
+@media(min-width:768px) {
+	.sideMenu {
+		display: block;
+		padding-right: 0 !important;
+	}
+	.topMenu {
+		display: none;
+	}
+} */
+
+.side-logo-img {
+	margin: 0.5em auto;
+    border-style: solid;
+    border-color: #f0f0f0;
+    border-radius: 5px;
+} 
+
+.gasoline, .diesel {
+	margin-bottom: 1em;
+}
+
+h2.gasoline, h2.diesel {
+	text-align: center;
+	color: darkgrey;
+	margin-bottom: 0;
+}
+
+.pump-value {
+	color: red;
+	margin-left: 2em;
+}
+
+th {
+	font-weight: bold;
+	color: #aaaaaa;
+}
+
+p {
+	text-align: center;
+	font-size: small;
+}
+
