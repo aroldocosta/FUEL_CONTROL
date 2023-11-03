@@ -28,4 +28,8 @@ public class TankService {
 	public Tank findByFuel(String fuel) {
 		return repository.findByFuel(fuel);
 	}
+	
+	public Tank findById(Long id) {
+		return repository.findById(id).get();
+	}
 }

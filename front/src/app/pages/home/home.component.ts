@@ -87,8 +87,8 @@ export class HomeComponent implements OnInit{
        f.pump == this.filteredPumps[2].pump  ||
        f.pump == this.filteredPumps[3].pump) &&
       (this.isFilteredDate(f.date) || this.enabledDate) &&
-      (f.tank == this.filteredTank || this.filteredTank == 'ALL') 
-  );
+      (f.tankName == this.filteredTank || this.filteredTank == 'ALL') 
+    );
   }
 
   requestPumps() {
@@ -138,5 +138,4 @@ export class HomeComponent implements OnInit{
   openModal(fueling: Fueling) {
 
   }
-
 }

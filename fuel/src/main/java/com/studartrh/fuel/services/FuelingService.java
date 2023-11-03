@@ -13,7 +13,6 @@ import com.studartrh.fuel.dto.TotalsDTO;
 import com.studartrh.fuel.entity.Fueling;
 import com.studartrh.fuel.entity.Tank;
 import com.studartrh.fuel.repository.FuelingRepository;
-import com.studartrh.fuel.repository.TankRepository;
 
 @Service
 public class FuelingService {
@@ -27,7 +26,7 @@ public class FuelingService {
 	public ResponseEntity<List<FuelingDTO> > getAll() {
 	
 		try {
-			List<FuelingDTO> resp = repository.findAll().stream().map(FuelingDTO::new).toList();		
+			List<FuelingDTO> resp = repository.findAll().stream().map(FuelingDTO::new).toList();
 			return ResponseEntity.ok(resp);
 		} catch (Exception e) {
 			return ResponseEntity.noContent().build();
@@ -49,13 +48,14 @@ public class FuelingService {
 		try {
 			Fueling fueling = new Fueling(data);
 			FuelingDTO resp = new FuelingDTO(repository.save(fueling));	
+			message = "Ok";
 			return ResponseEntity.ok(resp);
 		} catch (DataIntegrityViolationException e) {
 			message = e.getMessage();
 		} catch (Exception e) {
 			message = e.getMessage();
 		}
-		return ResponseEntity.ok(new FuelingDTO(null, null, null, null, null, null, null, message));
+		return ResponseEntity.ok(new FuelingDTO(null, null, null, null, null, null, null, null, null, message));
 	}
 	
 	public ResponseEntity<FuelingDTO> update(Long id) {
@@ -63,13 +63,14 @@ public class FuelingService {
 		try {
 			Fueling fueling = repository.findById(id).get();
 			FuelingDTO resp = new FuelingDTO(repository.save(fueling));
+			message = "Ok";
 			return ResponseEntity.ok(resp);
 		} catch (DataIntegrityViolationException e) {
 			message = e.getMessage();
 		} catch (Exception e) {
 			message = e.getMessage();
 		}
-		return ResponseEntity.ok(new FuelingDTO(null, null, null, null, null, null, null, message));
+		return ResponseEntity.ok(new FuelingDTO(null, null, null, null, null, null, null, null, null, message));
 	}
 	
 	public ResponseEntity<FuelingDTO> delete(Long id) {
@@ -81,7 +82,7 @@ public class FuelingService {
 		} catch (Exception e) {
 			message = e.getMessage();
 		}
-		return ResponseEntity.ok(new FuelingDTO(null, null, null, null, null, null, null, message));
+		return ResponseEntity.ok(new FuelingDTO(null, null, null, null, null, null, null, null, null, message));
 	}	
 	
 	public ResponseEntity<TotalsDTO> totals() {

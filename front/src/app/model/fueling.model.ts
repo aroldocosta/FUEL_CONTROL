@@ -1,7 +1,9 @@
 export class Fueling {
     pump: string = '';
     quantity: number = 0;
-    tank: string = '';
+    amount: number = 0;
+    fuel: string = '';
+    tankName: string = '';
     unitPrice: number = 0;
     taxation: number = 0;
     total: number = 0;
