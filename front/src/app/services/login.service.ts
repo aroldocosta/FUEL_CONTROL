@@ -1,6 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { environment } from 'src/environments/environment';
 import { AuthenticationDTO } from '../model/authentication.model';
 import { User } from '../model/user.model';
 
@@ -10,12 +11,14 @@ import { User } from '../model/user.model';
 export class LoginService {
 
   user!: User;
+  readonly baseUrl = environment.API_BASE_URL;
 
   constructor(private http: HttpClient) { }
 
   public resquestLogin(login: string, password: string): Observable<any> {
+    const url = `${this.baseUrl}auth/login`;
     let authentication: AuthenticationDTO = new AuthenticationDTO(login, password);
-    return this.http.post("http://localhost:8080/auth/login", authentication, {});
+    return this.http.post(url, authentication, {});
   }
 
   getAuthData() {

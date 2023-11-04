@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { environment } from 'src/environments/environment';
 import { Fueling } from '../model/fueling.model';
 
 @Injectable({
@@ -8,18 +9,17 @@ import { Fueling } from '../model/fueling.model';
 })
 export class FuelingsService {
 
-  baseUrl = "http://localhost:8080/fuelings";
+  readonly baseUrl = environment.API_BASE_URL;
 
   constructor(private http: HttpClient) { }
 
   list() {
-    const url = this.baseUrl;
-    // return this.http.get(url, this.login.getHttpOptions());
+    const url = `${this.baseUrl}fuelings`;
     return this.http.get<Fueling[]>(url, {});
   }
 
   totals() {
-    const url = this.baseUrl + "/totals";
+    const url = `${this.baseUrl}fuelings/totals`;
     return this.http.get(url, {});
   }
 }

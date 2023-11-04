@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { environment } from 'src/environments/environment';
 import { Tank } from '../model/tank.modal';
 
 @Injectable({
@@ -7,11 +8,11 @@ import { Tank } from '../model/tank.modal';
 })
 export class TankService {
 
-  baseUrl = "http://localhost:8080";
+  readonly baseUrl = environment.API_BASE_URL;
   constructor(private http: HttpClient) { }
 
   list() {
-    const url = this.baseUrl + "/tanks";
+    const url = `${this.baseUrl}tanks`;
     return this.http.get<Tank[]>(url, {});
   }
 }

@@ -1,19 +1,18 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { HttpResponse } from '@capacitor/core';
-import { Observable } from 'rxjs';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ReportService {
 
-  baseUrl = "http://localhost:8080";
+  readonly baseUrl = environment.API_BASE_URL;
 
   constructor(private http: HttpClient) { }
 
   report() {
-    const url = this.baseUrl + '/report';
+    const url = `${this.baseUrl}report`;
     return this.http.get(url, { responseType: 'blob' });
   }
  }
