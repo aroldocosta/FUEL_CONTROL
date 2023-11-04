@@ -11,7 +11,7 @@ export class FuelingTableComponent {
   @Input()  tableData: Fueling[] = [];
   @Output() newEvent = new EventEmitter<Fueling>();
   @Output() editEvent = new EventEmitter<Fueling>();
-  @Output() removeEvent = new EventEmitter<Fueling>();
+  @Output() removeEvent = new EventEmitter<number>();
 
   constructor() {}
 
@@ -24,7 +24,7 @@ export class FuelingTableComponent {
     this.editEvent.emit(fueling);
   }
 
-  emitRemoveEvent(fueling: Fueling) {
-    this.removeEvent.emit(fueling);
+  emitRemoveEvent(id: number) {
+    this.removeEvent.emit(id);
   }
 }

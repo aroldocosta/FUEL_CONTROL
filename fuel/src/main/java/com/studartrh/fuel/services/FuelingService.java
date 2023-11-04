@@ -1,6 +1,8 @@
 package com.studartrh.fuel.services;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
+import java.time.LocalDateTime;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,8 +13,10 @@ import org.springframework.stereotype.Service;
 import com.studartrh.fuel.dto.FuelingDTO;
 import com.studartrh.fuel.dto.TotalsDTO;
 import com.studartrh.fuel.entity.Fueling;
+import com.studartrh.fuel.entity.Pump;
 import com.studartrh.fuel.entity.Tank;
 import com.studartrh.fuel.repository.FuelingRepository;
+import com.studartrh.fuel.repository.PumpRepository;
 
 @Service
 public class FuelingService {
@@ -22,6 +26,9 @@ public class FuelingService {
 	
 	@Autowired
 	private TankService tankService;
+	
+	@Autowired
+	private PumpRepository pumpRepository;
 	
 	public ResponseEntity<List<FuelingDTO> > getAll() {
 	
@@ -48,9 +55,27 @@ public class FuelingService {
 	}
 	
 	public ResponseEntity<FuelingDTO> save(FuelingDTO data) {
+		
 		String message = "";
+		System.out.println("Pump: " + data.pump() + " Value: " + data.amount());
 		try {
-			Fueling fueling = new Fueling(data);
+			Fueling fueling = new Fueling(data);			
+			String today = LocalDateTime.now().toString();
+			
+			Pump pump = pumpRepository.findById(Long.valueOf(data.pump())).get();
+			BigDecimal tax = pump.getTank().getTax();
+			BigDecimal value = data.amount();
+			BigDecimal unitPrice = pump.getTank().getUnitPrice(); 
+			BigDecimal quantity  = value.divide(unitPrice, 2, RoundingMode.HALF_UP);
+			BigDecimal taxation  = fueling.calculateTaxation(value, tax);
+			BigDecimal amount    = fueling.calculateAmount(value, tax);
+					
+			fueling.setAmount(amount);
+			fueling.setTaxation(taxation);
+			fueling.setQuantity(quantity);
+			fueling.setPump(pump);
+			fueling.setDate(today);
+
 			FuelingDTO resp = new FuelingDTO(repository.save(fueling));	
 			message = "Ok";
 			return ResponseEntity.ok(resp);
@@ -59,7 +84,7 @@ public class FuelingService {
 		} catch (Exception e) {
 			message = e.getMessage();
 		}
-		return ResponseEntity.ok(new FuelingDTO(null, null, null, null, null, null, null, null, message));
+		return ResponseEntity.ok(new FuelingDTO(null, null, null, null, null, null, null, null, null, message));
 	}
 	
 	public ResponseEntity<FuelingDTO> update(Long id) {
@@ -74,7 +99,7 @@ public class FuelingService {
 		} catch (Exception e) {
 			message = e.getMessage();
 		}
-		return ResponseEntity.ok(new FuelingDTO(null, null, null, null, null, null, null, null, message));
+		return ResponseEntity.ok(new FuelingDTO(null, null, null, null, null, null, null, null, null, message));
 	}
 	
 	public ResponseEntity<FuelingDTO> delete(Long id) {
@@ -82,11 +107,12 @@ public class FuelingService {
 		try {
 			Fueling fueling = repository.findById(id).get();
 			repository.delete(fueling);
+			message = "Ok";
 			return ResponseEntity.ok(new FuelingDTO(fueling));
 		} catch (Exception e) {
 			message = e.getMessage();
 		}
-		return ResponseEntity.ok(new FuelingDTO(null, null, null, null, null, null, null, null, message));
+		return ResponseEntity.ok(new FuelingDTO(null, null, null, null, null, null, null, null, null, message));
 	}	
 	
 	public ResponseEntity<TotalsDTO> totals() {

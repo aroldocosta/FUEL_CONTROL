@@ -7,6 +7,7 @@ import { Tank } from 'src/app/model/tank.modal';
 import { FuelingsService } from 'src/app/services/fuelings.service';
 import { LoginService } from 'src/app/services/login.service';
 import { PumpService } from 'src/app/services/pump.service';
+import {formatNumber} from '@angular/common';
 
 @Component({
   selector: 'app-home',
@@ -18,7 +19,9 @@ export class HomeComponent implements OnInit{
   @Input() tankList: any;
   @Input() pumpList: any;
   report: any = 'Aguarde...';
-  fueling: Fueling = new Fueling();
+  fueling: any;
+  fuelingPump: string = '0';
+  fuelingValue: string = '';
   alertMessage: string = '';
   fuelingList: Fueling[] = [];
   filteredList: Fueling[] = [];
@@ -41,12 +44,7 @@ export class HomeComponent implements OnInit{
   }
 
   ngOnInit(): void {
-    this.fuelingService.list().subscribe({
-      next: list => {        
-        this.fuelingList = list;
-        this.filteredList = this.fuelingList;
-      }
-    });
+    this.list();
     let today = new Date();
     this.filteredDate = (today.getMonth()+1) + "/" + today.getDate() + "/" + today.getFullYear();
 
@@ -133,8 +131,33 @@ export class HomeComponent implements OnInit{
     console.log("Open pump modal: " + pump.name)
   }
 
+  formatValue(){
+    let strValue = this.fuelingValue;
+    strValue = strValue.replaceAll('.', '');
+    strValue = strValue.replaceAll(',', '');
+    let value = Number(strValue)/100
+    this.fuelingValue = formatNumber(value, 'pt-BR', '1.2-2');
+  }
+
   new() {
 
+    let pump  = this.fuelingPump;
+    let value = this.fuelingValue.replaceAll('.', '').replaceAll(',', '.');
+    
+    let fueling = {
+      pump: this.fuelingPump,
+      amount: value
+    }
+    
+    this.fuelingService.create(fueling).subscribe({
+      next: resp => {
+        console.log(JSON.stringify(resp));
+        document.getElementById("newCloseModalButton")?.click();
+        this.fuelingValue = '';
+        this.fuelingPump = '0';
+        this.list();
+      }
+    })
   }
 
   view(formData: FormData) {
@@ -142,11 +165,29 @@ export class HomeComponent implements OnInit{
   }
 
   list() {
-
+    this.fuelingService.list().subscribe({
+      next: list => {        
+        this.fuelingList = list;
+        this.filteredList = this.fuelingList;
+      }
+    });
   }
 
   edit(fueling: Fueling) {
 
+  }
+
+  remove(id: number) {
+    console.log('remove(fueling: Fueling)');
+    let resp = confirm('Confirma remover o abastecimento?');
+
+    if(resp) {
+      this.fuelingService.remove(id).subscribe(resp => {
+        console.log(JSON.stringify(resp));
+        this.list();
+      })
+    }
+    document.getElementById("newCloseModalButton")?.click();
   }
 
   home() {

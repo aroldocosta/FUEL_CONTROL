@@ -1,4 +1,5 @@
 export class Fueling {
+    id: number = 1;
     pump: string = '';
     quantity: number = 0;
     amount: number = 0;

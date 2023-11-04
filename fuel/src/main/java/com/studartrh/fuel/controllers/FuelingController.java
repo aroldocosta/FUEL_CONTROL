@@ -36,6 +36,7 @@ public class FuelingController {
 		return service.get(id);
 	}
 	@PostMapping(value = "")
+	@CrossOrigin(origins = "*", allowedHeaders = "*", methods = RequestMethod.POST)
 	public ResponseEntity<FuelingDTO> save(@RequestBody FuelingDTO data) {
 		return service.save(data);
 	}
@@ -44,6 +45,7 @@ public class FuelingController {
 		return service.update(id);
 	}
 	@DeleteMapping(value = "/{id}")
+	@CrossOrigin(origins = "*", allowedHeaders = "*", methods = RequestMethod.DELETE)
 	public ResponseEntity<FuelingDTO> delete(@PathVariable("id") Long id) {
 		return service.delete(id);
 	}

@@ -12,30 +12,44 @@ th {
     display: inline-flex;
 }
 
-.form-check {
-    margin-top: 0.5em;    
-    float: right !important;
-}
-
-.checkbox-group {
-    position: absolute;
-    right: 5em;
-}
-
 .btn-modal {
     width: 50%;
     float: right;
+}
+
+.form-check {
+    width: 100%;
+}
+
+.fueling-btn {
+    height: 88%;
+    font-size: 1.6em;
 }
 
 @media screen and (max-width: 1200px) {
     .small {
         width: 50%;
     }
+
+    .fueling-btn {
+        height: 88%;
+        font-size: 1.0em;
+    }
+
+    .form-check-label {
+        font-size: 0.6em;
+    }
 }
 
 @media screen and (max-width: 768px) {
     .small-check {
         width: 25%;
+    }
+
+    .fueling-btn {
+        height: 2em;
+        font-size: 1.7em;
+        margin-bottom: 0.5em;
     }
 }
 
@@ -46,6 +60,12 @@ th {
 
     .btn-modal {
         width: 100%;
+    }
+
+    .fueling-btn {
+        height: 3.5em;
+        font-size: 1.2em;
+        margin-bottom: 0.5em;
     }
 }
 

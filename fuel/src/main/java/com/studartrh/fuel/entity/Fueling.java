@@ -104,24 +104,26 @@ public class Fueling {
 	private BigDecimal getPrice() {
 		return pump.getTank().getUnitPrice();
 	}
-	
-	private BigDecimal getFuelingValue() {
+
+	public BigDecimal calculateValue() {
 		BigDecimal price = getPrice();
 		return this.quantity.multiply(price);
 	}
 	
-	public BigDecimal calculateTaxation() {
-		BigDecimal tax = getTax();
-		BigDecimal value = getFuelingValue();		
+	public BigDecimal calculateTaxation(BigDecimal value, BigDecimal tax) {	
 		BigDecimal taxation = value.multiply(tax).divide(BigDecimal.valueOf(100.0));
 		return (taxation);
 	}
 	
-	public BigDecimal calculateAmount() {
-		BigDecimal value = getFuelingValue();
-		BigDecimal taxation = calculateTaxation();
+	public BigDecimal calculateAmount(BigDecimal value, BigDecimal tax) {
+		BigDecimal taxation = calculateTaxation(value, tax);
 		BigDecimal amount = value.add(taxation);
 		return (amount) ;
+	}
+	                  
+	public BigDecimal calculateTotal(BigDecimal amount, BigDecimal taxation) {
+		BigDecimal total = amount.add(taxation);
+		return total;
 	}
 	
 	public String getFuel() {
