@@ -5,7 +5,7 @@ import java.math.BigDecimal;
 import com.studartrh.fuel.entity.Fueling;
 
 
-public record FuelingDTO(String pump, BigDecimal quantity, String fuel, String tankName, BigDecimal unitPrice, BigDecimal amount, BigDecimal taxation, BigDecimal total, String date, String message) {
+public record FuelingDTO(String pump, BigDecimal quantity, String fuel, String tankName, BigDecimal unitPrice, BigDecimal amount, BigDecimal taxation, String date, String message) {
 	public FuelingDTO(Fueling fueling) {
 		this(
 			fueling.getPump().getName(), 
@@ -14,8 +14,7 @@ public record FuelingDTO(String pump, BigDecimal quantity, String fuel, String t
 			fueling.getTankName(),
 			fueling.getUnitPrice(),
 			fueling.getAmount(),
-			fueling.getTaxation(),
-			fueling.getAmount(),		
+			fueling.getTaxation(),	
 			fueling.getDate(),
 			"Ok");
 	}

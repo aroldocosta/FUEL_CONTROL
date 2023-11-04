@@ -6,6 +6,9 @@ insert into pump (id, name, tank_id) values (1, 'BOMBA_02', 0);
 insert into pump (id, name, tank_id) values (2, 'BOMBA_03', 1);
 insert into pump (id, name, tank_id) values (3, 'BOMBA_04', 1);
 
+insert into fueling (quantity, amount, taxation, pump_id, date) values (10.00, 53.7000,  6.981000,  0, '2023-11-03T00:00:00');
+insert into fueling (quantity, amount, taxation, pump_id, date) values (10.00, 58.9000,  7.657000,  1, '2023-11-03T00:00:00');
+insert into fueling (quantity, amount, taxation, pump_id, date) values (10.00, 53.7000,  6.981000,  2, '2023-11-03T00:00:00');
 insert into fueling (quantity, amount, taxation, pump_id, date) values (10.00, 53.7000,  6.981000,  3, '2023-11-03T00:00:00');
 insert into fueling (quantity, amount, taxation, pump_id, date) values (10.00, 58.9000,  7.657000,  0, '2023-11-03T00:00:00');
 insert into fueling (quantity, amount, taxation, pump_id, date) values (10.00, 53.7000,  6.981000,  1, '2023-11-03T00:00:00');

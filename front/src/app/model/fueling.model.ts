@@ -6,7 +6,6 @@ export class Fueling {
     tankName: string = '';
     unitPrice: number = 0;
     taxation: number = 0;
-    total: number = 0;
     date: string = '--/--/--';
     message: string = '';
     

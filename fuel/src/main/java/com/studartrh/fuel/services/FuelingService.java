@@ -59,7 +59,7 @@ public class FuelingService {
 		} catch (Exception e) {
 			message = e.getMessage();
 		}
-		return ResponseEntity.ok(new FuelingDTO(null, null, null, null, null, null, null, null, null, message));
+		return ResponseEntity.ok(new FuelingDTO(null, null, null, null, null, null, null, null, message));
 	}
 	
 	public ResponseEntity<FuelingDTO> update(Long id) {
@@ -74,7 +74,7 @@ public class FuelingService {
 		} catch (Exception e) {
 			message = e.getMessage();
 		}
-		return ResponseEntity.ok(new FuelingDTO(null, null, null, null, null, null, null, null, null, message));
+		return ResponseEntity.ok(new FuelingDTO(null, null, null, null, null, null, null, null, message));
 	}
 	
 	public ResponseEntity<FuelingDTO> delete(Long id) {
@@ -86,7 +86,7 @@ public class FuelingService {
 		} catch (Exception e) {
 			message = e.getMessage();
 		}
-		return ResponseEntity.ok(new FuelingDTO(null, null, null, null, null, null, null, null, null, message));
+		return ResponseEntity.ok(new FuelingDTO(null, null, null, null, null, null, null, null, message));
 	}	
 	
 	public ResponseEntity<TotalsDTO> totals() {
