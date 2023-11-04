@@ -7,11 +7,11 @@ import { Tank } from '../model/tank.modal';
 })
 export class TankService {
 
-  baseUrl = "http://localhost:8080/tanks";
+  baseUrl = "http://localhost:8080";
   constructor(private http: HttpClient) { }
 
   list() {
-    const url = this.baseUrl;
+    const url = this.baseUrl + "/tanks";
     return this.http.get<Tank[]>(url, {});
   }
 }

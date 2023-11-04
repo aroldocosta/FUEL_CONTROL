@@ -131,6 +131,10 @@ public class Fueling {
 		return pump.getTank().getName();
 	}
 	
+	public String getPumpName() {
+		return pump.getName();
+	}
+	
 	public BigDecimal getUnitPrice() {
 		return pump.getTank().getUnitPrice();
 	}

@@ -7,6 +7,7 @@ import { User } from 'src/app/model/user.model';
 // import { PageComponent } from 'src/app/pages/page/page.component';
 import { LoginService } from 'src/app/services/login.service';
 import { PumpService } from 'src/app/services/pump.service';
+import { ReportService } from 'src/app/services/report.service';
 import { TankService } from 'src/app/services/tank.service';
 // import { UserService } from 'src/app/services/user.service';
 
@@ -17,15 +18,16 @@ import { TankService } from 'src/app/services/tank.service';
 })
 export class HeaderComponent implements OnInit{
  
-  @Output() tankEvent = new EventEmitter<Tank[]>();
-  @Output() pumpEvent = new EventEmitter<Pump[]>();
+  @Output() tankEvent   = new EventEmitter<Tank[]>();
+  @Output() pumpEvent   = new EventEmitter<Pump[]>();
+  @Output() reportEvent = new EventEmitter<any>();
   logged: any = new User();
 
   constructor(
     private tankService: TankService,
     private pumpService: PumpService,
-    private login: LoginService, 
-    private router: Router) {
+    private reportService: ReportService,
+    private login: LoginService) {
   }
 
   ngOnInit(): void {
@@ -56,6 +58,12 @@ export class HeaderComponent implements OnInit{
   requestTanks() {
     this.tankService.list().subscribe(list => {
       this.tankEvent.emit(list);
+    })
+  }
+
+  requestReport(){
+    this.reportService.report().subscribe(report => {
+      this.reportEvent.emit(report);
     })
   }
 

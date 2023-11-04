@@ -33,6 +33,10 @@ public class FuelingService {
 		}
 	}
 	
+	public List<Fueling> reportAll() {
+		return repository.findAll();
+	}
+	
 	public ResponseEntity<FuelingDTO> get(Long id) {	
 		
 		try {

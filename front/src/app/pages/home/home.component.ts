@@ -17,6 +17,7 @@ export class HomeComponent implements OnInit{
 
   @Input() tankList: any;
   @Input() pumpList: any;
+  report: any = 'Aguarde...';
   fueling: Fueling = new Fueling();
   alertMessage: string = '';
   fuelingList: Fueling[] = [];
@@ -57,6 +58,23 @@ export class HomeComponent implements OnInit{
 
   setTankList(list: Tank[]) {
     this.tankList = list;
+  }
+
+  setReportFile(report: any) {
+    console.log("Report: ", report);
+    const file = new Blob([report], {
+      type: report.type
+    });
+
+    const blob = window.URL.createObjectURL(file);
+
+    const link = document.createElement('a');
+    link.href = blob;
+    link.download = 'report.pdf';
+    link.click();
+
+    window.URL.revokeObjectURL(blob);
+    link.remove();
   }
 
   setFilteredPump(index: number) {  

@@ -1,6 +1,7 @@
 <app-header 
 	(pumpEvent)="setPumpList($event)"
 	(tankEvent)="setTankList($event)"
+	(reportEvent)="setReportFile($event)"
 ></app-header>
  <div class="container-fluid">
 	<input id="page_id" type="hidden" value="home_admin">
@@ -128,35 +129,5 @@
 	  </div>
 	</div>
   </div>
-  <div class="modal fade" id="reportModalToggle" aria-labelledby="reportModalToggleLabel" tabindex="-1" aria-hidden="true" style="display: none;">
-	<div class="modal-dialog modal-xl">
-	  <div class="modal-content">
-		<div class="modal-header">
-		  <h1 class="modal-title fs-5" id="reportModalToggleLabel">RELATÓRIOS</h1>
-		  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-		</div>
-		<div class="modal-body">
-			<hr class="colorgraph">
-			<div class="table-responsive">
-				<app-fueling-table 
-					[tableData]="filteredList"
-					newEvent="new"
-					editEvent="edit"
-					removeEvent="openModal"
-				></app-fueling-table>
-				{{alertMessage}}
-				<app-alert-message 
-					[message]="alertMessage"
-					(click)="showNotImplementedAlert()"
-				></app-alert-message>
-			</div>
-			<hr class="colorgraph">
-		</div>
-		<div class="modal-footer">
-		  <button class="btn btn-outline-primary btn-modal" (click)="showNotImplementedAlert()">CADASTRAR TANQUE</button>
-		</div>
-	  </div>
-	</div>
-  </div>
-</div>
+ </div>
 <app-footer></app-footer>
