@@ -145,11 +145,11 @@ public class Fueling {
 	}
 	
 	public Boolean isGasoline() {
-		return Tank.GASOLINA.equals(this.getPump().getTank().getName());
+		return Tank.GASOLINA.equals(this.getPump().getTank().getFuel());
 	}
 	
 	public Boolean isDiesel() {
-		return Tank.DIESEL.equals(this.getPump().getTank().getName());
+		return Tank.DIESEL.equals(this.getPump().getTank().getFuel());
 	}
 	
 	public Boolean isThisDay() {
