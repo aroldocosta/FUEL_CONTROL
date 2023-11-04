@@ -118,7 +118,7 @@ export class HomeComponent implements OnInit{
   }
 
   editPump(pump: any) {
-    alert(pump.name);
+    console.log(pump.name);
   }
 
   showNotImplementedAlert() {
@@ -130,7 +130,7 @@ export class HomeComponent implements OnInit{
   }
 
   openPumpModal(pump: any) {
-    alert("Open pump modal: " + pump.name)
+    console.log("Open pump modal: " + pump.name)
   }
 
   new() {
