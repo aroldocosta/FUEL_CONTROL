@@ -26,7 +26,7 @@ public class FuelingController {
 	@Autowired
 	private FuelingService service;
 	
-	@GetMapping("/")
+	@GetMapping("")
 	@CrossOrigin(origins = "*", allowedHeaders = "*", methods = RequestMethod.GET)
 	public ResponseEntity<List<FuelingDTO> > getAll() {
 		return service.getAll();
@@ -35,7 +35,7 @@ public class FuelingController {
 	public ResponseEntity<FuelingDTO> get(@PathVariable("id") Long id) {     
 		return service.get(id);
 	}
-	@PostMapping(value = "/")
+	@PostMapping(value = "")
 	public ResponseEntity<FuelingDTO> save(@RequestBody FuelingDTO data) {
 		return service.save(data);
 	}
