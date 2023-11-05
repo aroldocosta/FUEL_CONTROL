@@ -22,7 +22,7 @@ export class HomeComponent implements OnInit{
   report: any = 'Aguarde...';
   editingFueling = new Fueling("0", 0.0);
   creatingFuelingPumpId = '0';
-  creatingFuelingPayment = '0';
+  creatingFuelingPayment = '';
   editingFuelingPumpId = '0';
   editingFuelingPayment = '0';
   editingFuelingDate = '0';
@@ -52,7 +52,6 @@ export class HomeComponent implements OnInit{
     this.list();
     let today = new Date();
     this.filteredDate = (today.getMonth()+1) + "/" + today.getDate() + "/" + today.getFullYear();
-
   }
 
   setPumpList(list: Pump[]) {
@@ -64,7 +63,6 @@ export class HomeComponent implements OnInit{
   }
 
   setReportFile(report: any) {
-    console.log("Report: ", report);
     const file = new Blob([report], {
       type: report.type
     });
@@ -120,9 +118,6 @@ export class HomeComponent implements OnInit{
     })
   }
 
-  editPump(pump: any) {
-    console.log(pump.name);
-  }
 
   showNotImplementedAlert() {
     this.alertMessage = 'Função ainda não implementada neste MVP!';
@@ -132,21 +127,22 @@ export class HomeComponent implements OnInit{
     this.alertMessage = '';
   }
 
-  openPumpModal(pump: any) {
-    console.log("Open pump modal: " + pump.name)
-  }
-
-  formatCreatingInputValue(){
+  formatCreatingInputPayment(){
     let inputValue = this.creatingFuelingPayment;
     let value = this.appyCurrencyMask(inputValue)
     this.creatingFuelingPayment = value;
   }
 
-  formatEditingInputValue() {
+  formatEditingInputPayment() {
     let inputValue = this.editingFuelingPayment.toString();
     let value = this.appyCurrencyMask(inputValue);
     this.editingFuelingPayment = value;
+  }
 
+  formatEditingInputQuantity() {
+    let inputValue = this.editingFuelingQuantity.toString();
+    let value = this.appyCurrencyMask(inputValue);
+    this.editingFuelingQuantity = value;
   }
 
   appyCurrencyMask(inputValue: string) {
@@ -167,7 +163,6 @@ export class HomeComponent implements OnInit{
 
     this.fuelingService.create(fueling).subscribe({
       next: resp => {
-        console.log(JSON.stringify(resp));
         document.getElementById("newCloseModalButton")?.click();
         this.creatingFuelingPayment = '';
         this.creatingFuelingPumpId = '0';
@@ -191,26 +186,23 @@ export class HomeComponent implements OnInit{
 
   edit(fueling: Fueling) {
     this.editingFuelingPumpId = fueling.pumpId;
-    this.editingFuelingPayment = fueling.payment.toString();
-    this.editingFuelingPayment = this.appyCurrencyMask(this.editingFuelingPayment + ',00');
-    this.editingFuelingDate = fueling.date.split('T')[0];
-    console.log(fueling.date);
-    console.log( this.editingFuelingDate );
-    this.editingFuelingQuantity = fueling.quantity.toString();
+    this.editingFuelingPayment = this.appyCurrencyMask(fueling.payment.toFixed(2));
+    this.editingFuelingQuantity = this.appyCurrencyMask(fueling.quantity.toFixed(2));
+    this.editingFuelingDate = fueling.date.split('T')[0];   
     this.editingFueling = fueling;
   }
 
   update() { 
-    let payment = this.editingFuelingPayment.replaceAll('.', '').replaceAll(',', '.')
+    let payment  = this.editingFuelingPayment.replaceAll('.', '').replaceAll(',', '.');
+    let quantity = this.editingFuelingQuantity.replaceAll('.', '').replaceAll(',', '.');
     let fueling = this.editingFueling;
-    fueling.payment = Number(payment)
-    fueling.pumpId = this.editingFuelingPumpId;
-    let newDate = Date.parse(fueling.date);
+    fueling.date     = this.editingFuelingDate;
+    fueling.payment  = Number(payment)
+    fueling.quantity = Number(quantity);
+    fueling.pumpId   = this.editingFuelingPumpId;
 
     this.fuelingService.update(fueling).subscribe({
       next: resp => {
-        alert(JSON.stringify(resp));
-        console.log(JSON.stringify(resp));
         document.getElementById("editCloseModalButton")?.click();
         this.list();
       }
@@ -218,12 +210,10 @@ export class HomeComponent implements OnInit{
   }
 
   remove(id: number) {
-    console.log('remove(fueling: Fueling)');
     let resp = confirm('Confirma remover o abastecimento?');
 
     if(resp) {
       this.fuelingService.remove(id).subscribe(resp => {
-        console.log(JSON.stringify(resp));
         this.list();
       })
     }

@@ -17,7 +17,7 @@
         <tbody>
             <tr *ngFor="let f of tableData">
                 <td>{{f.id}}</td>
-                <td>{{f.date}}</td>	
+                <td>{{f.date | date: 'dd/MM/yyyy'}}</td>	
                 <td>{{f.pumpName}}</td>
                 <td>{{f.tankName}}/{{f.fuel}}</td>
                 <td>{{f.quantity  | number: '1.2-2'}}</td>

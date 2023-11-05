@@ -84,7 +84,11 @@
 					></app-fueling-table>
 				<hr class="colorgraph">
 				<div>
-					<button (click)="new()" class="btn btn-outline-info btn-block btn-right" tabindex="12">REGISTRAR ABASTECIMENTO</button>
+					<button (click)="new()" class="btn btn-outline-info btn-block btn-right" 
+					tabindex="12"
+					data-bs-target="#newModalToggle" 
+					data-bs-toggle="modal"
+					>REGISTRAR ABASTECIMENTO</button>
 				</div>
 			</section>
 	   </div>
@@ -158,15 +162,15 @@
 					</div>
 				</div>
 				<div class="col-6">
-					<label for="">TOTAL</label>
+					<label for="">VALOR PAGO</label>
 					<div class="input-group input-group-lg">
 						<span class="input-group-text" id="inputGroup-sizing-lg">R$</span>
 						<input type="text" class="form-control" 
-							(input)="formatCreatingInputValue()"
+							(input)="formatCreatingInputPayment()"
 							aria-label="Sizing example input" 
 							aria-describedby="inputGroup-sizing-lg" 
 							[(ngModel)]="creatingFuelingPayment"
-							placeholder="0.00"
+							placeholder="0,00"
 							>
 					</div>
 				</div>
@@ -206,6 +210,7 @@
 					<div class="input-group input-group-lg">
 						<span class="input-group-text" id="inputGroup-sizing-lg">Lts</span>
 						<input type="text" class="form-control" 
+							(input)="formatEditingInputQuantity()"
 							aria-label="Sizing example input" 
 							aria-describedby="inputGroup-sizing-lg" 
 							[(ngModel)]="editingFuelingQuantity"
@@ -215,7 +220,7 @@
 			</div>	
 			<div class="row" style="padding: 2em">	
 				<div class="col-6">
-					<label for="">DATA {{editingFuelingDate}}</label>
+					<label for="">DATA</label>
 					<div class="input-group input-group-lg">
 						<input type="date" class="form-control" 
 							aria-label="Sizing example input" 
@@ -229,11 +234,11 @@
 					<div class="input-group input-group-lg">
 						<span class="input-group-text" id="inputGroup-sizing-lg">R$</span>
 						<input type="text" class="form-control" 
-							(input)="formatEditingInputValue()"
+							(input)="formatEditingInputPayment()"
 							aria-label="Sizing example input" 
 							aria-describedby="inputGroup-sizing-lg" 
 							[(ngModel)]="editingFuelingPayment"
-							placeholder="0.00"
+							placeholder="0,00"
 						>
 					</div>
 				</div>
@@ -241,7 +246,7 @@
 		</div>
 		<hr class="colorgraph">
 		<div class="modal-footer">
-		  <button class="btn btn-outline-primary btn-modal" (click)="update()">xxx-SALVAR-xxx</button>
+		  <button class="btn btn-outline-primary btn-modal" (click)="update()">SALVAR</button>
 		</div>
 	  </div>
 	</div>
