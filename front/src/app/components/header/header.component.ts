@@ -79,8 +79,6 @@ export class HeaderComponent implements OnInit{
     return !true;
   }
 
-
-
   loginForm() {
     // this.goToLink("/login", this.login, this.router);
   }

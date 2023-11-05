@@ -1,10 +1,10 @@
 insert into tank (id, name, fuel, tax, unit_price) values (1, 'TANQUE_01', 'DIESEL', 13.0, 10.00);
 insert into tank (id, name, fuel, tax, unit_price) values (2, 'TANQUE_02', 'GASOLINA', 13.0, 5.00);
 
-insert into pump (id, name, tank_id) values (1, 'BOMBA_01', 1);							 
-insert into pump (id, name, tank_id) values (2, 'BOMBA_02', 1);
-insert into pump (id, name, tank_id) values (3, 'BOMBA_03', 2);
-insert into pump (id, name, tank_id) values (4, 'BOMBA_04', 2);
+insert into pump (id, name, tank_id) values (1, 'BOMBA1', 1);							 
+insert into pump (id, name, tank_id) values (2, 'BOMBA2', 1);
+insert into pump (id, name, tank_id) values (3, 'BOMBA3', 2);
+insert into pump (id, name, tank_id) values (4, 'BOMBA4', 2);
 
 insert into fueling (quantity, payment, taxation, pump_id, date) values (31, 155, 20.15, 1, '2023-10-02T00:00:00');
 insert into fueling (quantity, payment, taxation, pump_id, date) values (22, 110, 14.3,  2, '2023-10-02T00:00:00');
