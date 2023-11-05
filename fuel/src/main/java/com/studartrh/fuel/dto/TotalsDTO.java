@@ -9,12 +9,12 @@ public record TotalsDTO(
 		BigDecimal dTodayQuantity, 
 		BigDecimal dMonthQuantity, 
 		BigDecimal dYearQuantity,	
-		BigDecimal gTodayAmount, 
-		BigDecimal gMonthAmount, 
-		BigDecimal gYearAmount, 
-		BigDecimal dTodayAmount, 
-		BigDecimal dMonthAmount, 
-		BigDecimal dYearAmount,
+		BigDecimal gTodayPayment, 
+		BigDecimal gMonthPayment, 
+		BigDecimal gYearPayment, 
+		BigDecimal dTodayPayment, 
+		BigDecimal dMonthPayment, 
+		BigDecimal dYearPayment,
 		BigDecimal gUnitPrice,
 		BigDecimal dUnitPrice
 	) {

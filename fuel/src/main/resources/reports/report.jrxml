@@ -22,9 +22,9 @@
 	<field name="fuel" class="java.lang.String"/>
 	<field name="quantity" class="java.math.BigDecimal"/>
 	<field name="taxation" class="java.math.BigDecimal"/>
-	<field name="amount" class="java.math.BigDecimal"/>
-	<variable name="periodAmount" class="java.math.BigDecimal" calculation="Sum">
-		<variableExpression><![CDATA[$F{amount}]]></variableExpression>
+	<field name="payment" class="java.math.BigDecimal"/>
+	<variable name="periodPayment" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[$F{payment}]]></variableExpression>
 	</variable>
 	<variable name="periodQuantity" class="java.math.BigDecimal" calculation="Sum">
 		<variableExpression><![CDATA[$F{quantity}]]></variableExpression>
@@ -154,7 +154,7 @@
 			<textField>
 				<reportElement x="466" y="-18" width="60" height="12" uuid="78e9a811-330e-4888-8d85-a4e4a213fa2c"/>
 				<textElement textAlignment="Right"/>
-				<textFieldExpression><![CDATA[$F{amount}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{payment}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>
@@ -206,7 +206,7 @@
 				<textElement textAlignment="Right">
 					<font size="12" isBold="true" isItalic="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$V{periodAmount}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$V{periodPayment}]]></textFieldExpression>
 			</textField>
 			<textField pattern="¤#,##0.##;¤-##0.##">
 				<reportElement x="383" y="11" width="70" height="30" uuid="12e48c46-fc9a-4929-86cb-095f4a276b8b"/>

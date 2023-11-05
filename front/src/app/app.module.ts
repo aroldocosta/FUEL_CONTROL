@@ -17,6 +17,7 @@ import { FuelingTableComponent } from './components/fueling-table/fueling-table.
 import { AlertMessageComponent } from './components/alert-message/alert-message.component';
 import { PumpTableComponent } from './components/pump-table/pump-table.component';
 import { TankTableComponent } from './components/tank-table/tank-table.component';
+import { FuelingFormComponent } from './components/fueling-form/fueling-form.component';
 
 registerLocaleData(ptBr);
 
@@ -33,6 +34,7 @@ registerLocaleData(ptBr);
     AlertMessageComponent,
     PumpTableComponent,
     TankTableComponent,
+    FuelingFormComponent,
   ],
   imports: [
     FormsModule,

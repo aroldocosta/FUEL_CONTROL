@@ -27,24 +27,21 @@ export class FuelingsService {
   }
 
 
-  get(id: string) {
+  get(id: number) {
     const url = `${this.baseUrl}fuelings/${id}`;
-    return this.http.get(url, {});
+    return this.http.get<Fueling>(url, {});
   }
   
   create(fueling: any): Observable<any> {
     const url = `${this.baseUrl}fuelings`;
-
-    console.log("Url: " + JSON.stringify(url) + "\nHeaders: " + JSON.stringify(this.options));
-
     return this.http.post(url, fueling, this.options);
   }
-/*
-  update(user: any): Observable<any> {
-    const url = this.baseUrl + "/" + user.id;
-    return this.http.put(url, user, this.login.getHttpOptions());
+
+  update(fueling: Fueling): Observable<any> {
+    const url = `${this.baseUrl}fuelings`;
+    return this.http.put(url, fueling, this.options);
   }
-*/
+
   remove(id: any): Observable<any> {
     const url = `${this.baseUrl}fuelings/${id}`;
     return this.http.delete(url, this.options);

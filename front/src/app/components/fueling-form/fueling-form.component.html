@@ -1,0 +1,29 @@
+<hr class="colorgraph">
+<div class="row" style="padding: 2em">
+    <div class="col-6">
+        <label for="">BOMBA</label>
+        <div class="input-group input-group-lg">
+            <select class="form-select" aria-label="Default select example" [(ngModel)]="pumpId">
+                <option value="0"selected>Selecione a bomba</option>
+                <option value="1">BOMBA1</option>
+                <option value="2">BOMBA2</option>
+                <option value="3">BOMBA3</option>
+                <option value="4">BOMBA4</option>
+            </select>
+        </div>
+    </div>
+    <div class="col-6">
+        <label for="">VALOR</label>
+        <div class="input-group input-group-lg">
+            <span class="input-group-text" id="inputGroup-sizing-lg">R$</span>
+            <input type="text" class="form-control" 
+                (input)="formatInput()"
+                aria-label="Sizing example input" 
+                aria-describedby="inputGroup-sizing-lg" 
+                [(ngModel)]="inputValue"
+                placeholder="0.00"
+                >
+        </div>
+    </div>
+</div>
+<hr class="colorgraph">

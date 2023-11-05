@@ -1,8 +1,12 @@
+import { TitleStrategy } from "@angular/router";
+
 export class Fueling {
-    id: number = 1;
-    pump: string = '';
+    id: number = 0;
+    pumpId: string = '0'
+    pumpName: string = '';
     quantity: number = 0;
-    amount: number = 0;
+    payment: number = 0;
+    total: number = 0;
     fuel: string = '';
     tankName: string = '';
     unitPrice: number = 0;
@@ -10,7 +14,8 @@ export class Fueling {
     date: string = '--/--/--';
     message: string = '';
     
-    constructor() {
-
+    constructor(pumpName: string, value: number) {
+        this.pumpName = pumpName;
+        this.payment = value;
     }
 }

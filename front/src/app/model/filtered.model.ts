@@ -1,9 +1,9 @@
 export class Filtered {
-    pump: string = '';
+    pumpName: string = '';
     checked: boolean = false;
 
-    constructor(pump: string, checked: boolean) {
-        this.pump = pump;
+    constructor(pumpName: string, checked: boolean) {
+        this.pumpName = pumpName;
         this.checked = checked;
     }
 }

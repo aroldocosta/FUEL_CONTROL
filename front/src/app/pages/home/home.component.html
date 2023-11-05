@@ -78,8 +78,8 @@
 				<hr class="colorgraph">  				        
 					<app-fueling-table 
 						[tableData]="filteredList"
-						(newEvent)="new"
-						(editEvent)="edit"
+						(newEvent)="new()"
+						(editEvent)="edit($event)"
 						(removeEvent)="remove($event)"
 					></app-fueling-table>
 				<hr class="colorgraph">
@@ -148,36 +148,103 @@
 				<div class="col-6">
 					<label for="">BOMBA</label>
 					<div class="input-group input-group-lg">
-						<select class="form-select" aria-label="Default select example" [(ngModel)]="fuelingPump">
+						<select class="form-select" aria-label="Default select example" [(ngModel)]="creatingFuelingPumpId">
 							<option value="0"selected>Selecione a bomba</option>
-							<option value="0">BOMBA1</option>
-							<option value="1">BOMBA2</option>
-							<option value="2">BOMBA3</option>
-							<option value="3">BOMBA4</option>
+							<option value="1">BOMBA1</option>
+							<option value="2">BOMBA2</option>
+							<option value="3">BOMBA3</option>
+							<option value="4">BOMBA4</option>
 						</select>
 					</div>
 				</div>
 				<div class="col-6">
-					<label for="">VALOR</label>
+					<label for="">TOTAL</label>
 					<div class="input-group input-group-lg">
 						<span class="input-group-text" id="inputGroup-sizing-lg">R$</span>
 						<input type="text" class="form-control" 
-							(input)="formatValue()"
+							(input)="formatCreatingInputValue()"
 							aria-label="Sizing example input" 
 							aria-describedby="inputGroup-sizing-lg" 
-							[(ngModel)]="fuelingValue"
+							[(ngModel)]="creatingFuelingPayment"
 							placeholder="0.00"
 							>
 					</div>
 				</div>
 			</div>
-			<hr class="colorgraph">
-		</div>
+		</div>	
+		<hr class="colorgraph">
 		<div class="modal-footer">
-		  <button class="btn btn-outline-primary btn-modal" (click)="new()">SALVAR</button>
+			<button class="btn btn-outline-primary btn-modal" (click)="new()">SALVAR</button>
+	    </div>	
+	  </div>
+	</div>	
+  </div>	  	
+  <div class="modal fade" id="editModalToggle" aria-labelledby="editModalToggleLabel" tabindex="-1" aria-hidden="true" style="display: none;">
+	<div class="modal-dialog modal-xl">
+	  <div class="modal-content">
+		<div class="modal-header">
+		  <h1 class="modal-title fs-5" id="editModalToggleLabel">EDITAR ABASTECIMENTO</h1>
+		  <button id="editCloseModalButton" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+		</div>
+		<div class="modal-body">
+			<hr class="colorgraph">
+			<div class="row" style="padding: 2em">
+				<div class="col-6">
+					<label for="">BOMBA</label>
+					<div class="input-group input-group-lg">
+						<select class="form-select" aria-label="Default select example" [(ngModel)]="editingFuelingPumpId">
+							<option value="0"selected>Selecione a bomba</option>
+							<option value="1">BOMBA1</option>
+							<option value="2">BOMBA2</option>
+							<option value="3">BOMBA3</option>
+							<option value="4">BOMBA4</option>
+						</select>
+					</div>
+				</div>
+				<div class="col-6">
+					<label for="">QUANTIDADE</label>
+					<div class="input-group input-group-lg">
+						<span class="input-group-text" id="inputGroup-sizing-lg">Lts</span>
+						<input type="text" class="form-control" 
+							aria-label="Sizing example input" 
+							aria-describedby="inputGroup-sizing-lg" 
+							[(ngModel)]="editingFuelingQuantity"
+						>
+					</div>
+				</div>
+			</div>	
+			<div class="row" style="padding: 2em">	
+				<div class="col-6">
+					<label for="">DATA {{editingFuelingDate}}</label>
+					<div class="input-group input-group-lg">
+						<input type="date" class="form-control" 
+							aria-label="Sizing example input" 
+							aria-describedby="inputGroup-sizing-lg" 
+							[(ngModel)]="editingFuelingDate"
+						>
+					</div>
+				</div>
+				<div class="col-6">
+					<label for="">VALOR PAGO</label>
+					<div class="input-group input-group-lg">
+						<span class="input-group-text" id="inputGroup-sizing-lg">R$</span>
+						<input type="text" class="form-control" 
+							(input)="formatEditingInputValue()"
+							aria-label="Sizing example input" 
+							aria-describedby="inputGroup-sizing-lg" 
+							[(ngModel)]="editingFuelingPayment"
+							placeholder="0.00"
+						>
+					</div>
+				</div>
+			</div>
+		</div>
+		<hr class="colorgraph">
+		<div class="modal-footer">
+		  <button class="btn btn-outline-primary btn-modal" (click)="update()">xxx-SALVAR-xxx</button>
 		</div>
 	  </div>
 	</div>
   </div>
- </div>
+</div>
 <app-footer></app-footer>

@@ -15,23 +15,23 @@ export class AsideComponent implements OnInit {
   gTodayQuantity: number = 0.0;
   gMonthQuantity: number = 0.0;
   gYearQuantity: number = 0.0;
-  gTodayAmount: number = 0.0;
-  gMonthAmount: number = 0.0;
-  gYearAmount: number = 0.0;
+  gTodayPayment: number = 0.0;
+  gMonthPayment: number = 0.0;
+  gYearPayment: number = 0.0;
 
   dTodayQuantity: number = 0.0;
   dMonthQuantity: number = 0.0;
   dYearQuantity: number = 0.0;
-  dTodayAmount: number = 0.0;
-  dMonthAmount: number = 0.0;
-  dYearAmount: number = 0.0;
+  dTodayPayment: number = 0.0;
+  dMonthPayment: number = 0.0;
+  dYearPayment: number = 0.0;
 
   tTodayQuantity: number = 0.0;
   tMonthQuantity: number = 0.0;
   tYearQuantity: number = 0.0;
-  tTodayAmount: number = 0.0;
-  tMonthAmount: number = 0.0;
-  tYearAmount: number = 0.0;
+  tTodayPayment: number = 0.0;
+  tMonthPayment: number = 0.0;
+  tYearPayment: number = 0.0;
 
   gUnitPrice: number = 5.85;
   dUnitPrice: number = 5.99;
@@ -58,25 +58,25 @@ export class AsideComponent implements OnInit {
         this.gTodayQuantity = totals.gTodayQuantity;
         this.gMonthQuantity = totals.gMonthQuantity;
         this.gYearQuantity  = totals.gYearQuantity;
-        this.gTodayAmount   = totals.gTodayAmount;
-        this.gMonthAmount   = totals.gMonthAmount;
-        this.gYearAmount    =  totals.gYearAmount;
+        this.gTodayPayment   = totals.gTodayPayment;
+        this.gMonthPayment   = totals.gMonthPayment;
+        this.gYearPayment    =  totals.gYearPayment;
 
         //--------- Diesel totals -----------------
         this.dTodayQuantity = totals.dTodayQuantity;
         this.dMonthQuantity = totals.dMonthQuantity;
         this.dYearQuantity  = totals.dYearQuantity;
-        this.dTodayAmount   = totals.dTodayAmount;
-        this.dMonthAmount   = totals.dMonthAmount;
-        this.dYearAmount    = totals.dYearAmount;
+        this.dTodayPayment   = totals.dTodayPayment;
+        this.dMonthPayment   = totals.dMonthPayment;
+        this.dYearPayment    = totals.dYearPayment;
 
         //---------- General totals --------------- 
         this.tTodayQuantity = this.gTodayQuantity + this.dTodayQuantity;
         this.tMonthQuantity = this.gMonthQuantity + this.dMonthQuantity;
         this.tYearQuantity  = this.gYearQuantity  + this.dYearQuantity;
-        this.tTodayAmount   = this.gTodayAmount   + this.dTodayAmount;
-        this.tMonthAmount   = this.gMonthAmount   + this.dMonthAmount;
-        this.tYearAmount    = this.gYearAmount    + this.dYearAmount;
+        this.tTodayPayment   = this.gTodayPayment   + this.dTodayPayment;
+        this.tMonthPayment   = this.gMonthPayment   + this.dMonthPayment;
+        this.tYearPayment    = this.gYearPayment    + this.dYearPayment;
 
         //---------- Unit prices ------------------
         this.gUnitPrice = totals.gUnitPrice;

@@ -37,12 +37,13 @@ public class FuelingController {
 	}
 	@PostMapping(value = "")
 	@CrossOrigin(origins = "*", allowedHeaders = "*", methods = RequestMethod.POST)
-	public ResponseEntity<FuelingDTO> save(@RequestBody FuelingDTO data) {
-		return service.save(data);
+	public ResponseEntity<FuelingDTO> save(@RequestBody FuelingDTO dto) {
+		return service.save(dto);
 	}
-	@PutMapping(value = "/{id}")
-	public ResponseEntity<FuelingDTO> update(@PathVariable("id") Long id, @RequestBody FuelingDTO data) {
-		return service.update(id);
+	@PutMapping(value = "")
+	@CrossOrigin(origins = "*", allowedHeaders = "*", methods = RequestMethod.PUT)
+	public ResponseEntity<FuelingDTO> update(@RequestBody FuelingDTO dto) {
+		return service.update(dto);
 	}
 	@DeleteMapping(value = "/{id}")
 	@CrossOrigin(origins = "*", allowedHeaders = "*", methods = RequestMethod.DELETE)

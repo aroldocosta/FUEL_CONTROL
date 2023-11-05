@@ -8,6 +8,7 @@ import { FuelingsService } from 'src/app/services/fuelings.service';
 import { LoginService } from 'src/app/services/login.service';
 import { PumpService } from 'src/app/services/pump.service';
 import {formatNumber} from '@angular/common';
+import { ThisReceiver } from '@angular/compiler';
 
 @Component({
   selector: 'app-home',
@@ -19,9 +20,13 @@ export class HomeComponent implements OnInit{
   @Input() tankList: any;
   @Input() pumpList: any;
   report: any = 'Aguarde...';
-  fueling: any;
-  fuelingPump: string = '0';
-  fuelingValue: string = '';
+  editingFueling = new Fueling("0", 0.0);
+  creatingFuelingPumpId = '0';
+  creatingFuelingPayment = '0';
+  editingFuelingPumpId = '0';
+  editingFuelingPayment = '0';
+  editingFuelingDate = '0';
+  editingFuelingQuantity = '0';
   alertMessage: string = '';
   fuelingList: Fueling[] = [];
   filteredList: Fueling[] = [];
@@ -29,10 +34,10 @@ export class HomeComponent implements OnInit{
   filteredDate: string = '';
   filteredTank: string = 'ALL';
   filteredPumps: Filtered[] = [
-    new Filtered('BOMBA_01', true),
-    new Filtered('BOMBA_02', true),
-    new Filtered('BOMBA_03', true),
-    new Filtered('BOMBA_04', true),
+    new Filtered('BOMBA1', true),
+    new Filtered('BOMBA2', true),
+    new Filtered('BOMBA3', true),
+    new Filtered('BOMBA4', true),
   ];
 
   constructor(
@@ -77,8 +82,8 @@ export class HomeComponent implements OnInit{
 
   setFilteredPump(index: number) {  
       this.filteredPumps[index] = this.filteredPumps[index].checked
-            ? this.filteredPumps[index] = {pump: 'BOMBA_XX', checked: false }
-            : this.filteredPumps[index] = {pump: 'BOMBA_0' + String(index + 1) , checked: true };
+            ? this.filteredPumps[index] = {pumpName: 'BOMBAXX', checked: false }
+            : this.filteredPumps[index] = {pumpName: 'BOMBA0' + String(index + 1) , checked: true };
       this.filterFueling();
   }
 
@@ -98,10 +103,10 @@ export class HomeComponent implements OnInit{
 
   filterFueling() {
     this.filteredList = this.fuelingList.filter(f => 
-      (f.pump == this.filteredPumps[0].pump  ||
-       f.pump == this.filteredPumps[1].pump  ||
-       f.pump == this.filteredPumps[2].pump  ||
-       f.pump == this.filteredPumps[3].pump) &&
+      (f.pumpName == this.filteredPumps[0].pumpName  ||
+       f.pumpName == this.filteredPumps[1].pumpName  ||
+       f.pumpName == this.filteredPumps[2].pumpName  ||
+       f.pumpName == this.filteredPumps[3].pumpName) &&
       (this.isFilteredDate(f.date) || this.enabledDate) &&
       (f.tankName == this.filteredTank || this.filteredTank == 'ALL') 
     );
@@ -131,30 +136,41 @@ export class HomeComponent implements OnInit{
     console.log("Open pump modal: " + pump.name)
   }
 
-  formatValue(){
-    let strValue = this.fuelingValue;
-    strValue = strValue.replaceAll('.', '');
-    strValue = strValue.replaceAll(',', '');
-    let value = Number(strValue)/100
-    this.fuelingValue = formatNumber(value, 'pt-BR', '1.2-2');
+  formatCreatingInputValue(){
+    let inputValue = this.creatingFuelingPayment;
+    let value = this.appyCurrencyMask(inputValue)
+    this.creatingFuelingPayment = value;
+  }
+
+  formatEditingInputValue() {
+    let inputValue = this.editingFuelingPayment.toString();
+    let value = this.appyCurrencyMask(inputValue);
+    this.editingFuelingPayment = value;
+
+  }
+
+  appyCurrencyMask(inputValue: string) {
+    inputValue = inputValue.replaceAll('.', '');
+    inputValue = inputValue.replaceAll(',', '');
+    let value = Number(inputValue)/100;
+    return formatNumber(value, 'pt-BR', '1.2-2');
   }
 
   new() {
-
-    let pump  = this.fuelingPump;
-    let value = this.fuelingValue.replaceAll('.', '').replaceAll(',', '.');
+    let pumpId  = this.creatingFuelingPumpId;
+    let value = this.creatingFuelingPayment.toString().replaceAll('.', '').replaceAll(',', '.');
     
     let fueling = {
-      pump: this.fuelingPump,
-      amount: value
+      pumpId: pumpId,
+      payment: value
     }
-    
+
     this.fuelingService.create(fueling).subscribe({
       next: resp => {
         console.log(JSON.stringify(resp));
         document.getElementById("newCloseModalButton")?.click();
-        this.fuelingValue = '';
-        this.fuelingPump = '0';
+        this.creatingFuelingPayment = '';
+        this.creatingFuelingPumpId = '0';
         this.list();
       }
     })
@@ -174,7 +190,31 @@ export class HomeComponent implements OnInit{
   }
 
   edit(fueling: Fueling) {
+    this.editingFuelingPumpId = fueling.pumpId;
+    this.editingFuelingPayment = fueling.payment.toString();
+    this.editingFuelingPayment = this.appyCurrencyMask(this.editingFuelingPayment + ',00');
+    this.editingFuelingDate = fueling.date.split('T')[0];
+    console.log(fueling.date);
+    console.log( this.editingFuelingDate );
+    this.editingFuelingQuantity = fueling.quantity.toString();
+    this.editingFueling = fueling;
+  }
 
+  update() { 
+    let payment = this.editingFuelingPayment.replaceAll('.', '').replaceAll(',', '.')
+    let fueling = this.editingFueling;
+    fueling.payment = Number(payment)
+    fueling.pumpId = this.editingFuelingPumpId;
+    let newDate = Date.parse(fueling.date);
+
+    this.fuelingService.update(fueling).subscribe({
+      next: resp => {
+        alert(JSON.stringify(resp));
+        console.log(JSON.stringify(resp));
+        document.getElementById("editCloseModalButton")?.click();
+        this.list();
+      }
+    })
   }
 
   remove(id: number) {
@@ -191,10 +231,6 @@ export class HomeComponent implements OnInit{
   }
 
   home() {
-
-  }
-
-  openModal(fueling: Fueling) {
 
   }
 }

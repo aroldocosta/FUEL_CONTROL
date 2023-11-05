@@ -33,8 +33,8 @@ public class Fueling {
 	@Column(name = "taxation")
 	private BigDecimal taxation;
 	
-	@Column(name = "amount")
-	private BigDecimal amount;
+	@Column(name = "payment")
+	BigDecimal payment;
 		
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "pump_id")
@@ -45,8 +45,14 @@ public class Fueling {
 	}
 	
 	public Fueling(FuelingDTO dto) {
+		Pump pump = new Pump();
+		pump.setId(dto.pumpId());
+		this.id = dto.id();
+		this.pump = pump;
 		this.date = dto.date();
 		this.quantity = dto.quantity();
+		this.payment = dto.payment();
+		this.taxation = dto.taxation();
 	}
 	
 	public Long getId() {
@@ -58,9 +64,7 @@ public class Fueling {
 	}
 	
 	public String getDate() {
-		DateTimeFormatter fmt = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-		LocalDateTime ld = getLocalDateTime();
-		return fmt.format(ld);
+		return date;
 	}
 	
 	public void setDate(String date) {
@@ -81,13 +85,21 @@ public class Fueling {
 		this.taxation = taxation;
 	}
 
-	public BigDecimal getAmount() {
-		return amount;
+	public BigDecimal getPayment() {
+		return payment;
 	}
-	
-	public void setAmount(BigDecimal amount) {
-		this.amount = amount;
+
+	public void setPayment(BigDecimal payment) {
+		this.payment = payment;
 	}
+
+//	public BigDecimal getPayment() {
+//		return payment;
+//	}
+//	
+//	public void setPayment(BigDecimal payment) {
+//		this.payment = payment;
+//	}
 
 	public Pump getPump() {
 		return pump;
@@ -115,14 +127,14 @@ public class Fueling {
 		return (taxation);
 	}
 	
-	public BigDecimal calculateAmount(BigDecimal value, BigDecimal tax) {
+	public BigDecimal calculatePayment(BigDecimal value, BigDecimal tax) {
 		BigDecimal taxation = calculateTaxation(value, tax);
-		BigDecimal amount = value.add(taxation);
-		return (amount) ;
+		BigDecimal payment = value.add(taxation);
+		return (payment) ;
 	}
 	                  
-	public BigDecimal calculateTotal(BigDecimal amount, BigDecimal taxation) {
-		BigDecimal total = amount.add(taxation);
+	public BigDecimal calculateTotal(BigDecimal payment, BigDecimal taxation) {
+		BigDecimal total = payment.add(taxation);
 		return total;
 	}
 	
@@ -172,4 +184,18 @@ public class Fueling {
 		LocalDateTime date = this.getLocalDateTime();
 		return ( now.getYear() == date.getYear());
 	}
+	
+//	int counter = 0;
+//	for(FuelingDTO f : resp) {
+//		Integer pump_id = (counter++) % 4;
+//		Tank tank = tankService.findById(Long.valueOf(pump_id) % 2);
+//		BigDecimal payment = f.quantity().multiply(tank.getUnitPrice());
+//		BigDecimal taxation = tank.getTax().multiply(payment).divide(BigDecimal.valueOf(100));
+//		String query = "insert into fueling (quantity, payment, taxation, pump_id, date) values (__QUANTITY__, __PAYMENT__, __TAXATION__, __PUMP_ID__, '2023-10-02T00:00:00');";
+//		query = query.replace("__QUANTITY__", f.quantity().toString() );
+//		query = query.replace("__PAYMENT__", payment.toString());
+//		query = query.replace("__TAXATION__", taxation.toString() );
+//		query = query.replace("__PUMP_ID__", pump_id.toString() );
+//		System.out.println(query);	
+//	}
 }
