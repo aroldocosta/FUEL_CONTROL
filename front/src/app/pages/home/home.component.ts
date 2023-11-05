@@ -86,11 +86,11 @@ export class HomeComponent implements OnInit{
   }
 
   isFilteredDate(date: string) {    
-    let dateValues = date.split('/');
+    let dateValues = date.split('T')[0].split('-');
     let dateFilter = this.filteredDate.split('-');
-    let d_yea = Number(dateValues[2]);
+    let d_yea = Number(dateValues[0]);
     let d_mon = Number(dateValues[1]);
-    let d_day = Number(dateValues[0]);
+    let d_day = Number(dateValues[2]);
     let f_yea = Number(dateFilter[0]);
     let f_mon = Number(dateFilter[1]);
     let f_day = Number(dateFilter[2]);

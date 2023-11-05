@@ -26,9 +26,10 @@
 							<div class="col-md-6 small">
 								<label>DATA</label>
 								<div class="input-group mb-3">
+									{{enabledDate}}
 									<div class="input-group-text">
 									  <input class="form-check-input mt-0" type="checkbox" [(ngModel)]="enabledDate" 
-									  	aria-label="Checkbox" title="Seleciona todas as datas" (change)="filterFueling()">
+									  	aria-label="Checkbox" title="Seleciona todas as datas">
 									</div>
 									<input type="date" class="form-control" aria-describedby="basic-addon1" [disabled]="enabledDate"
 										(change)="filterFueling()" [ngModel]="filteredDate | date:'yyyy-MM-dd'" (ngModelChange)="filteredDate = $event" >
