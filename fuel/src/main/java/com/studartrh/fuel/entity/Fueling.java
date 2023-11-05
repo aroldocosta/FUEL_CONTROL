@@ -2,7 +2,7 @@ package com.studartrh.fuel.entity;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
+import java.util.Date;
 
 import com.studartrh.fuel.dto.FuelingDTO;
 
@@ -93,14 +93,6 @@ public class Fueling {
 		this.payment = payment;
 	}
 
-//	public BigDecimal getPayment() {
-//		return payment;
-//	}
-//	
-//	public void setPayment(BigDecimal payment) {
-//		this.payment = payment;
-//	}
-
 	public Pump getPump() {
 		return pump;
 	}
@@ -156,6 +148,17 @@ public class Fueling {
 	public LocalDateTime getLocalDateTime() {		
 		LocalDateTime localdate = LocalDateTime.parse(date);
 		return localdate;
+	}
+	
+	public String getReportDate() {
+		LocalDateTime ldt = getLocalDateTime();
+		int yea = ldt.getYear() - 2000;
+		int mon = ldt.getMonthValue();
+		int day = ldt.getDayOfMonth();
+		String date = ((day > 9) ? ("" + day)  : ( "0" + day)) + 
+				      ((mon > 9) ? ("/" + mon) : ("/0" + mon)) + 
+				      ((yea > 9) ? ("/" + yea) : ("/0" + yea));
+		return date;
 	}
 	
 	public Boolean isGasoline() {
