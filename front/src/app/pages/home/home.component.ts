@@ -34,12 +34,7 @@ export class HomeComponent implements OnInit{
   enabledDate: boolean = true;
   filteredDate: string = '';
   filteredTank: string = 'ALL';
-  filteredPumps: Filtered[] = [
-    new Filtered('BOMBA1', true),
-    new Filtered('BOMBA2', true),
-    new Filtered('BOMBA3', true),
-    new Filtered('BOMBA4', true),
-  ];
+  filteredPumps: Filtered[] = [];
 
   constructor(
     private fuelingService: FuelingsService, 
@@ -123,6 +118,7 @@ export class HomeComponent implements OnInit{
     this.pumpService.list().subscribe({
       next: list => {
         this.pumpList = list;
+        this.filteredPumps = this.pumpList.map((p: Pump) => new Filtered(p.name, true));
       }
     })
   }
