@@ -33,8 +33,8 @@ O url base da aplicação é configurada no projeto Angular nos arquivos da envi
 pasta **FUEL_CONTROL/front/src/environments** por meio da variável de ambiente **API_BASE_URL**
   
 ### Frontend
- - Foi utilizado os frameworks Angular e Bootstrap
- -  
+ - Foram utilizados os frameworks Angular e Bootstrap
+     
 ### Versões
 - **Java**: openjdk 17.0.8.1 2023-08-24
 - **Angular CLI**: 16.2.3
