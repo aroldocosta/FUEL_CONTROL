@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Pump } from 'src/app/model/pump.model';
 
 @Component({
   selector: 'app-fueling-form',
@@ -7,17 +8,34 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 })
 export class FuelingFormComponent {
 
-  inputValue: string = '0.0';
-  @Input() pumpId: string = '0';
-  @Input() value: string = '';
-  @Output() formatEvent = new EventEmitter<any>();
+  @Input() fuelingPayment: string = '';
+
+  @Input() command: string = '';
+  @Input() pumpList: any = [];
+  @Input() fuelingDate: string = '';
+  @Input() fuelingPumpId: string = '';
+  @Input() fuelingQuantity: string = '';  
+
+  @Output() paymentEvent = new EventEmitter<string>();
+  @Output() quantityEvent = new EventEmitter<string>();
+  @Output() dateEvent = new EventEmitter<string>();
+  @Output() pumpIdEvent = new EventEmitter<string>()
 
   constructor() {}
 
-  
-  formatInput() {
-    this.formatEvent.emit(this.inputValue);
+  emitFormatQuantityEvent() {
+    this.quantityEvent.emit(this.fuelingQuantity);
   }
 
+  emitFormatPaymentEvent() {
+    this.paymentEvent.emit(this.fuelingPayment);
+  }
 
+  emitDateEvent() {
+    this.dateEvent.emit(this.fuelingDate);
+  }
+
+  emitPumpIdEvent() {
+    this.pumpIdEvent.emit(this.fuelingPumpId);
+  }
 }

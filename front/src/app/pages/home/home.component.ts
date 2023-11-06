@@ -22,12 +22,10 @@ export class HomeComponent implements OnInit{
   @Input() pumpList: any;
   report: any = 'Aguarde...';
   editingFueling = new Fueling("0", 0.0);
-  creatingFuelingPumpId = '0';
-  creatingFuelingPayment = '';
-  editingFuelingPumpId = '0';
-  editingFuelingPayment = '0';
-  editingFuelingDate = '0';
-  editingFuelingQuantity = '0';
+  fuelingPayment = '';
+  fuelingPumpId = '0';
+  fuelingDate = '0';
+  fuelingQuantity = '0';
   alertMessage: string = '';
   fuelingList: Fueling[] = [];
   filteredList: Fueling[] = [];
@@ -138,22 +136,26 @@ export class HomeComponent implements OnInit{
     this.alertMessage = '';
   }
 
-  formatCreatingInputPayment(){
-    let inputValue = this.creatingFuelingPayment;
-    let value = this.appyCurrencyMask(inputValue)
-    this.creatingFuelingPayment = value;
+  setFuelingPumpId(pumpId: string) {
+    console.log("setFuelingPumpId: " + pumpId)
+    this.fuelingPumpId = pumpId;
+  }
+	
+  setFuelingDate(date: string) {
+    console.log("setFuelingDate: " + date)
+    this.fuelingDate = date;
   }
 
-  formatEditingInputPayment() {
-    let inputValue = this.editingFuelingPayment.toString();
+  formatInputPayment(input: string) {
+    let inputValue = input;
     let value = this.appyCurrencyMask(inputValue);
-    this.editingFuelingPayment = value;
+    this.fuelingPayment = value;
   }
 
-  formatEditingInputQuantity() {
-    let inputValue = this.editingFuelingQuantity.toString();
+  formatInputQuantity(input: string) {
+    let inputValue = input;
     let value = this.appyCurrencyMask(inputValue);
-    this.editingFuelingQuantity = value;
+    this.fuelingQuantity = value;
   }
 
   appyCurrencyMask(inputValue: string) {
@@ -164,8 +166,9 @@ export class HomeComponent implements OnInit{
   }
 
   new() {
-    let pumpId  = this.creatingFuelingPumpId;
-    let value = this.creatingFuelingPayment.toString().replaceAll('.', '').replaceAll(',', '.');
+    debugger
+    let pumpId  = this.fuelingPumpId;
+    let value = this.fuelingPayment.toString().replaceAll('.', '').replaceAll(',', '.');
     
     let fueling = {
       pumpId: pumpId,
@@ -175,8 +178,8 @@ export class HomeComponent implements OnInit{
     this.fuelingService.create(fueling).subscribe({
       next: resp => {
         document.getElementById("newCloseModalButton")?.click();
-        this.creatingFuelingPayment = '';
-        this.creatingFuelingPumpId = '0';
+        this.fuelingPayment = '';
+        this.fuelingPumpId = '0';
         this.list();
       }
     })
@@ -196,21 +199,21 @@ export class HomeComponent implements OnInit{
   }
 
   edit(fueling: Fueling) {
-    this.editingFuelingPumpId = fueling.pumpId;
-    this.editingFuelingPayment = this.appyCurrencyMask(fueling.payment.toFixed(2));
-    this.editingFuelingQuantity = this.appyCurrencyMask(fueling.quantity.toFixed(2));
-    this.editingFuelingDate = fueling.date.split('T')[0];   
+    this.fuelingPumpId = fueling.pumpId;
+    this.fuelingPayment = this.appyCurrencyMask(fueling.payment.toFixed(2));
+    this.fuelingQuantity = this.appyCurrencyMask(fueling.quantity.toFixed(2));
+    this.fuelingDate = fueling.date.split('T')[0];   
     this.editingFueling = fueling;
   }
 
   update() { 
-    let payment  = this.editingFuelingPayment.replaceAll('.', '').replaceAll(',', '.');
-    let quantity = this.editingFuelingQuantity.replaceAll('.', '').replaceAll(',', '.');
+    let payment  = this.fuelingPayment.replaceAll('.', '').replaceAll(',', '.');
+    let quantity = this.fuelingQuantity.replaceAll('.', '').replaceAll(',', '.');
     let fueling = this.editingFueling;
-    fueling.date     = this.editingFuelingDate;
+    fueling.date     = this.fuelingDate;
     fueling.payment  = Number(payment)
     fueling.quantity = Number(quantity);
-    fueling.pumpId   = this.editingFuelingPumpId;
+    fueling.pumpId   = this.fuelingPumpId;
 
     this.fuelingService.update(fueling).subscribe({
       next: resp => {

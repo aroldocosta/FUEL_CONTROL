@@ -128,33 +128,15 @@
 		  <button id="newCloseModalButton" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 		</div>
 		<div class="modal-body">
-			<hr class="colorgraph">
-			<div class="row" style="padding: 2em">
-				<div class="col-6">
-					<label for="">BOMBA</label>
-					<div class="input-group input-group-lg">
-						<select class="form-select" aria-label="Default select example" [(ngModel)]="creatingFuelingPumpId">
-							<option value="0"selected>Selecione a bomba</option>
-							<option *ngFor="let pump of pumpList" [value]="pump.id">{{pump.name}}</option>
-						</select>
-					</div>
-				</div>
-				<div class="col-6">
-					<label for="">VALOR PAGO</label>
-					<div class="input-group input-group-lg">
-						<span class="input-group-text" id="inputGroup-sizing-lg">R$</span>
-						<input type="text" class="form-control" 
-							(input)="formatCreatingInputPayment()"
-							aria-label="Sizing example input" 
-							aria-describedby="inputGroup-sizing-lg" 
-							[(ngModel)]="creatingFuelingPayment"
-							placeholder="0,00"
-							>
-					</div>
-				</div>
-			</div>
+				<app-fueling-form
+				command = 'creating'
+				[pumpList] = 'pumpList'
+				[fuelingPumpId]  = 'fuelingPumpId'
+				[fuelingPayment] = 'fuelingPayment'				
+				(paymentEvent) = 'formatInputPayment($event)'
+				(pumpIdEvent) = 'setFuelingPumpId($event)'
+			></app-fueling-form>
 		</div>	
-		<hr class="colorgraph">
 		<div class="modal-footer">
 			<button class="btn btn-outline-primary btn-modal" (click)="new()">SALVAR</button>
 	    </div>	
@@ -169,57 +151,19 @@
 		  <button id="editCloseModalButton" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 		</div>
 		<div class="modal-body">
-			<hr class="colorgraph">
-			<div class="row" style="padding: 2em">
-				<div class="col-6">
-					<label for="">BOMBA</label>
-					<div class="input-group input-group-lg">
-						<select class="form-select" aria-label="Default select example" [(ngModel)]="editingFuelingPumpId">
-							<option value="0"selected>Selecione a bomba</option>
-							<option *ngFor="let pump of pumpList" [value]="pump.id">{{pump.name}}</option>
-						</select>
-					</div>
-				</div>
-				<div class="col-6">
-					<label for="">QUANTIDADE</label>
-					<div class="input-group input-group-lg">
-						<span class="input-group-text" id="inputGroup-sizing-lg">Lts</span>
-						<input type="text" class="form-control" 
-							(input)="formatEditingInputQuantity()"
-							aria-label="Sizing example input" 
-							aria-describedby="inputGroup-sizing-lg" 
-							[(ngModel)]="editingFuelingQuantity"
-						>
-					</div>
-				</div>
-			</div>	
-			<div class="row" style="padding: 2em">	
-				<div class="col-6">
-					<label for="">DATA</label>
-					<div class="input-group input-group-lg">
-						<input type="date" class="form-control" 
-							aria-label="Sizing example input" 
-							aria-describedby="inputGroup-sizing-lg" 
-							[(ngModel)]="editingFuelingDate"
-						>
-					</div>
-				</div>
-				<div class="col-6">
-					<label for="">VALOR PAGO</label>
-					<div class="input-group input-group-lg">
-						<span class="input-group-text" id="inputGroup-sizing-lg">R$</span>
-						<input type="text" class="form-control" 
-							(input)="formatEditingInputPayment()"
-							aria-label="Sizing example input" 
-							aria-describedby="inputGroup-sizing-lg" 
-							[(ngModel)]="editingFuelingPayment"
-							placeholder="0,00"
-						>
-					</div>
-				</div>
-			</div>
+			<app-fueling-form
+				command = 'editing'
+				[pumpList] = 'pumpList'
+				[fuelingDate] = 'fuelingDate'
+				[fuelingPumpId] = 'fuelingPumpId'
+				[fuelingPayment] = 'fuelingPayment'
+				[fuelingQuantity] = 'fuelingQuantity'
+				(paymentEvent) = 'formatInputPayment($event)'
+				(quantityEvent) = 'formatInputQuantity($event)' 
+				(pumpIdEvent) = 'setFuelingPumpId($event)'
+				(dateEvent) = 'setFuelingDate($event)'
+			></app-fueling-form>
 		</div>
-		<hr class="colorgraph">
 		<div class="modal-footer">
 		  <button class="btn btn-outline-primary btn-modal" (click)="update()">SALVAR</button>
 		</div>
