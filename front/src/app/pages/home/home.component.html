@@ -26,7 +26,6 @@
 							<div class="col-md-6 small">
 								<label>DATA</label>
 								<div class="input-group mb-3">
-									{{enabledDate}}
 									<div class="input-group-text">
 									  <input class="form-check-input mt-0" type="checkbox" [(ngModel)]="enabledDate" 
 									  	aria-label="Checkbox" title="Seleciona todas as datas">
@@ -39,36 +38,17 @@
 								<label for="">TANQUE</label>
 								<select class="form-select" aria-label="Default select example" [(ngModel)]="filteredTank" (change)="filterFueling()">
 									<option value="ALL"selected>TODOS</option>
-									<option value="TANQUE_01">DIESEL</option>
-									<option value="TANQUE_02">GASOLINA</option>
+									<option *ngFor="let tank of tankList" [value]="tank.name">{{tank.fuel}}</option>
 								</select>
 							</div>
 						</div>
 						<div class="row">
 							<div class="col-sm-6" style="width: 100%">
 								<div class="row">
-									<div class="col-md-3 small-check">
+									<div class="col-md-3 small-check" *ngFor="let pump of pumpList; let i = index">
 										<div class="form-check form-check-inline">
-											<input class="form-check-input" type="checkbox" [(ngModel)]="filteredPumps[0].checked" (click)="setFilteredPump(0)"/>
-											<label class="form-check-label" for="inlineCheckbox1">BOMBA1</label>
-										</div>
-									</div>
-									<div class="col-md-3 small-check">
-										<div class="form-check form-check-inline">
-											<input class="form-check-input" type="checkbox" [(ngModel)]="filteredPumps[1].checked" (click)="setFilteredPump(1)"/>
-											<label class="form-check-label" for="inlineCheckbox1">BOMBA2</label>
-										</div>
-									</div>
-									<div class="col-md-3 small-check">
-										<div class="form-check form-check-inline">
-											<input class="form-check-input" type="checkbox" [(ngModel)]="filteredPumps[2].checked" (click)="setFilteredPump(2)"/>
-											<label class="form-check-label" for="inlineCheckbox1">BOMBA3</label>
-										</div>
-									</div>
-									<div class="col-md-3 small-check">
-										<div class="form-check form-check-inline">
-											<input class="form-check-input" type="checkbox" [(ngModel)]="filteredPumps[3].checked" (click)="setFilteredPump(3)"/>
-											<label class="form-check-label" for="inlineCheckbox1">BOMBA4</label>
+											<input class="form-check-input" type="checkbox" [(ngModel)]="filteredPumps[i].checked" (click)="setFilteredPump(i)"/>
+											<label class="form-check-label" for="inlineCheckbox1">{{pump.name}}</label>
 										</div>
 									</div>
 								</div>
@@ -155,10 +135,7 @@
 					<div class="input-group input-group-lg">
 						<select class="form-select" aria-label="Default select example" [(ngModel)]="creatingFuelingPumpId">
 							<option value="0"selected>Selecione a bomba</option>
-							<option value="1">BOMBA1</option>
-							<option value="2">BOMBA2</option>
-							<option value="3">BOMBA3</option>
-							<option value="4">BOMBA4</option>
+							<option *ngFor="let pump of pumpList" [value]="pump.id">{{pump.name}}</option>
 						</select>
 					</div>
 				</div>
@@ -199,10 +176,7 @@
 					<div class="input-group input-group-lg">
 						<select class="form-select" aria-label="Default select example" [(ngModel)]="editingFuelingPumpId">
 							<option value="0"selected>Selecione a bomba</option>
-							<option value="1">BOMBA1</option>
-							<option value="2">BOMBA2</option>
-							<option value="3">BOMBA3</option>
-							<option value="4">BOMBA4</option>
+							<option *ngFor="let pump of pumpList" [value]="pump.id">{{pump.name}}</option>
 						</select>
 					</div>
 				</div>

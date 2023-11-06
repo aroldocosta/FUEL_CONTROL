@@ -9,6 +9,7 @@ import { LoginService } from 'src/app/services/login.service';
 import { PumpService } from 'src/app/services/pump.service';
 import {formatNumber} from '@angular/common';
 import { ThisReceiver } from '@angular/compiler';
+import { TankService } from 'src/app/services/tank.service';
 
 @Component({
   selector: 'app-home',
@@ -43,13 +44,16 @@ export class HomeComponent implements OnInit{
   constructor(
     private fuelingService: FuelingsService, 
     private loginService: LoginService, 
-    private pumpService: PumpService
+    private pumpService: PumpService,
+    private tankService: TankService
     ) {
 
   }
 
   ngOnInit(): void {
     this.list();
+    this.requestPumps();
+    this.requestTanks();
     let today = new Date();
     this.filteredDate = (today.getMonth()+1) + "/" + today.getDate() + "/" + today.getFullYear();
   }
@@ -81,7 +85,7 @@ export class HomeComponent implements OnInit{
   setFilteredPump(index: number) {  
       this.filteredPumps[index] = this.filteredPumps[index].checked
             ? this.filteredPumps[index] = {pumpName: 'BOMBAXX', checked: false }
-            : this.filteredPumps[index] = {pumpName: 'BOMBA0' + String(index + 1) , checked: true };
+            : this.filteredPumps[index] = {pumpName: 'BOMBA' + String(index + 1) , checked: true };
       this.filterFueling();
   }
 
@@ -118,6 +122,13 @@ export class HomeComponent implements OnInit{
     })
   }
 
+  requestTanks() {
+    this.tankService.list().subscribe({
+      next: list => {
+        this.tankList = list;
+      }
+    })
+  }
 
   showNotImplementedAlert() {
     this.alertMessage = 'Função ainda não implementada neste MVP!';

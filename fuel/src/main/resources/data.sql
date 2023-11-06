@@ -1,5 +1,5 @@
-insert into tank (id, name, fuel, tax, unit_price) values (1, 'TANQUE_01', 'DIESEL', 13.0, 10.00);
-insert into tank (id, name, fuel, tax, unit_price) values (2, 'TANQUE_02', 'GASOLINA', 13.0, 5.00);
+insert into tank (id, name, fuel, tax, unit_price) values (1, 'TANQUE1', 'DIESEL', 13.0, 10.00);
+insert into tank (id, name, fuel, tax, unit_price) values (2, 'TANQUE2', 'GASOLINA', 13.0, 5.00);
 
 insert into pump (id, name, tank_id) values (1, 'BOMBA1', 1);							 
 insert into pump (id, name, tank_id) values (2, 'BOMBA2', 1);

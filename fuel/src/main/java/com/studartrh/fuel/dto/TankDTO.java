@@ -4,9 +4,9 @@ import java.math.BigDecimal;
 
 import com.studartrh.fuel.entity.Tank;
 
-public record TankDTO(Long id, String fuel, BigDecimal tax, BigDecimal unitPrice) {
+public record TankDTO(Long id, String name, String fuel, BigDecimal tax, BigDecimal unitPrice) {
 	
 	public TankDTO(Tank tank) {
-		this(tank.getId(), tank.getFuel(), tank.getTax(), tank.getUnitPrice());
+		this(tank.getId(), tank.getName(), tank.getFuel(), tank.getTax(), tank.getUnitPrice());
 	}
 }
