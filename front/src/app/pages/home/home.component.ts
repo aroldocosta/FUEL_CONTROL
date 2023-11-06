@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { Filtered } from 'src/app/model/filtered.model';
 import { Fueling } from 'src/app/model/fueling.model';
@@ -10,6 +10,7 @@ import { PumpService } from 'src/app/services/pump.service';
 import {formatNumber} from '@angular/common';
 import { ThisReceiver } from '@angular/compiler';
 import { TankService } from 'src/app/services/tank.service';
+import { AsideComponent } from 'src/app/components/aside/aside.component';
 
 @Component({
   selector: 'app-home',
@@ -18,6 +19,7 @@ import { TankService } from 'src/app/services/tank.service';
 })
 export class HomeComponent implements OnInit{
 
+  @ViewChild(AsideComponent) aside: any
   @Input() tankList: any;
   @Input() pumpList: any;
   report: any = 'Aguarde...';
@@ -183,6 +185,7 @@ export class HomeComponent implements OnInit{
         this.fuelingPayment = '';
         this.fuelingPumpId = '0';
         this.list();
+        this.aside.requestTotals();
       }
     })
   }
@@ -196,6 +199,7 @@ export class HomeComponent implements OnInit{
       next: list => {        
         this.fuelingList = list;
         this.filteredList = this.fuelingList;
+        this.aside.requestTotals();
       }
     });
   }
@@ -231,6 +235,7 @@ export class HomeComponent implements OnInit{
     if(resp) {
       this.fuelingService.remove(id).subscribe(resp => {
         this.list();
+        this.aside.requestTotals();
       })
     }
     document.getElementById("newCloseModalButton")?.click();

@@ -2,8 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { TitleStrategy } from '@angular/router';
 import { Totals } from 'src/app/model/totals.model';
 import { FuelingsService } from 'src/app/services/fuelings.service';
-// import { User } from 'src/app/model/user.model';
-// import { PageComponent } from 'src/app/pages/page/page.component';
 
 @Component({
   selector: 'app-aside',
