@@ -22,6 +22,13 @@ FUEL_CONTROL/fuel/src/main/resources/
 - 2 TANQUES: Exibe a lista de tanques cadastrados
 - 3 RELATORIO: Faz o download do aquivo pdf com os dados dos abastecimento. O relatório foi feito com Jasperreport
 
+### Coluna lateral
+- Exibe a totalização em tempo real (a cada mudança do banco) das quantidades e faturamento  por perído diário, mensal e anual
+  para cada tipo de combustíve/tanque assim como a totalização geral.
+
+### Obsevações
+- O crud completo foi implementado somente para a entidade Fueling(abastecimento)
+
 
 
    
