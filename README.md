@@ -8,7 +8,7 @@ Ha dois usuários configurado
 - senha: 87654321
 
 ### Operador:
-- login: admin@fuelcontrol.com
+- login: oper@fuelcontrol.com
 - senha: 87654321
 
 ### Banco de dados
