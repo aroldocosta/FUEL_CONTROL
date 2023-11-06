@@ -17,3 +17,12 @@ para dara carga inicial no banco foi utilizado o
 arquivo data.sql que se encontra na pasta resources
 FUEL_CONTROL/fuel/src/main/resources/
 
+### Menus
+- 1 BOMBAS: Exibe a lista de bombas cadastradas
+- 2 TANQUES: Exibe a lista de tanques cadastrados
+- 3 RELATORIO: Faz o download do aquivo pdf com os dados dos abastecimento. O relatório foi feito com Jasperreport
+
+
+
+   
+
