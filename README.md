@@ -1,17 +1,17 @@
 # FUEL_CONTROL
 Projeto desafio para gerenciamento de abastecimento
 
-# Intruções
+## Intruções
 Ha dois usuários configurado
-## Admin:
+### Admin:
 - login: admin@fuelcontrol.com
 - senha: 87654321
 
-## Operador:
+### Operador:
 - login: admin@fuelcontrol.com
 - senha: 87654321
 
-# Banco de dados
+### Banco de dados
 - O bando utilizado foi o banco em memória H2
 para dara carga inicial no banco foi utilizado o 
 arquivo data.sql que se encontra na pasta resources
