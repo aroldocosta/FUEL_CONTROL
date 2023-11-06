@@ -39,21 +39,21 @@ export class LoginComponent implements OnInit {
     let password = this.password.value
     this.router.navigateByUrl("/");
 
-    //  this.service.resquestLogin(login, password)
-    //  .subscribe({
-    //     next: ( auth ) => {
-    //       if(auth.token) {
-    //         this.service.setAuthData(auth);
-    //         this.router.navigateByUrl("/");
-    //       } else {
-    //         this.router.navigateByUrl("/login");
-    //         this.topMessage?.setAlertMessage("Token de autenticação inválido!", 4500);
-    //       }
-    //     },
-    //     error: ( err ) => {
-    //       console.log("Erro de autenticação: " + err.message);
-    //       this.topMessage?.setAlertMessage("Erro de autenticação!", 4500);
-    //     }
-    //  });
+     this.service.resquestLogin(login, password)
+     .subscribe({
+        next: ( auth ) => {
+          if(auth.token) {
+            this.service.setAuthData(auth);
+            this.router.navigateByUrl("/");
+          } else {
+            this.router.navigateByUrl("/login");
+            this.topMessage?.setAlertMessage("Token de autenticação inválido!", 4500);
+          }
+        },
+        error: ( err ) => {
+          console.log("Erro de autenticação: " + err.message);
+          this.topMessage?.setAlertMessage("Erro de autenticação!", 4500);
+        }
+     });
   }
 }

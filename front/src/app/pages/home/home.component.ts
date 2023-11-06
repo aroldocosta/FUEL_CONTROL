@@ -43,17 +43,22 @@ export class HomeComponent implements OnInit{
     private fuelingService: FuelingsService, 
     private loginService: LoginService, 
     private pumpService: PumpService,
-    private tankService: TankService
+    private tankService: TankService,
+    private router: Router
     ) {
 
   }
 
   ngOnInit(): void {
-    this.list();
-    this.requestPumps();
-    this.requestTanks();
-    let today = new Date();
-    this.filteredDate = (today.getMonth()+1) + "/" + today.getDate() + "/" + today.getFullYear();
+    if(!this.loginService.isAuthenticated()) {
+      this.router.navigateByUrl('/login');
+    } else {
+      this.list();
+      this.requestPumps();
+      this.requestTanks();
+      let today = new Date();
+      this.filteredDate = today.toDateString(); 
+    }
   }
 
   setPumpList(list: Pump[]) {
