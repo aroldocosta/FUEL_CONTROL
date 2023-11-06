@@ -142,12 +142,10 @@ export class HomeComponent implements OnInit{
   }
 
   setFuelingPumpId(pumpId: string) {
-    console.log("setFuelingPumpId: " + pumpId)
     this.fuelingPumpId = pumpId;
   }
 	
   setFuelingDate(date: string) {
-    console.log("setFuelingDate: " + date)
     this.fuelingDate = date;
   }
 
@@ -171,7 +169,6 @@ export class HomeComponent implements OnInit{
   }
 
   new() {
-    debugger
     let pumpId  = this.fuelingPumpId;
     let value = this.fuelingPayment.toString().replaceAll('.', '').replaceAll(',', '.');
     

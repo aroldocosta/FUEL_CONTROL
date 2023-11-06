@@ -24,7 +24,7 @@
         </li>
       </ul>
       <div class="nav-item dropdown">
-        <a class="a-link nav-link px-2 text-secondary" (click)="loginForm()">
+        <a class="a-link nav-link px-2 text-secondary" *ngIf="!isAuthenticated()">
           <i class="bi bi-box-arrow-in-right"></i> Login
         </a>
       </div>
@@ -33,8 +33,6 @@
             <span *ngIf="logged">Olá, {{logged.name}}</span>
         </a>
         <ul class="dropdown-menu">
-          <li><a class="dropdown-item a-link" (click)="userData()">
-            <i class="bi bi-person"></i> Meus dados</a></li>
           <li><a class="a-link dropdown-item" (click)="logout()">
             <i class="bi bi-box-arrow-right"></i> Sair</a></li>
         </ul>

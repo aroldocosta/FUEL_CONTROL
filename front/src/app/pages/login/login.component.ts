@@ -20,8 +20,8 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
     this.service.setAuthData(null);
     this.loginForm = new FormGroup({
-      login: new FormControl('aroldocosta@yahoo.com.br',[Validators.required]),
-      password: new FormControl('89c2051', [Validators.required]),
+      login: new FormControl('',[Validators.required]),
+      password: new FormControl('', [Validators.required]),
     })
   }
 
@@ -34,7 +34,7 @@ export class LoginComponent implements OnInit {
   }
 
 
-  onSubmit() {
+  requestLogin() {
     let login = this.login.value;
     let password = this.password.value
     this.router.navigateByUrl("/");

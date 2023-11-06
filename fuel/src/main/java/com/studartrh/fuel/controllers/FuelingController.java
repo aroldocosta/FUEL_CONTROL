@@ -36,7 +36,7 @@ public class FuelingController {
 		return service.get(id);
 	}
 	@PostMapping(value = "")
-	@CrossOrigin(origins = "*", allowedHeaders = "*", methods = RequestMethod.POST)
+	@CrossOrigin(origins = "*", allowedHeaders = "*")
 	public ResponseEntity<FuelingDTO> save(@RequestBody FuelingDTO dto) {
 		return service.save(dto);
 	}

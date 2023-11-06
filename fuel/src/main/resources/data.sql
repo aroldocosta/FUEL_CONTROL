@@ -1,11 +1,31 @@
+-- Usuarios
+insert into users (id, name, login, password, role) 
+values ('f8d1e2e0-739a-4af8-b72a-79044ccc03f0', 
+	    'Admin', 
+	    'admin@fuelcontrol.com', 
+	    '$2a$10$xDhFXJM95Ok4W2b9aLpoz.j5MZkml8IRPyshmR9zI9qdpYxV/mifu', 
+	    'ADMIN'
+);
+
+insert into users (id, name, login, password, role) 
+values ('2933d5c4-3b47-4355-acf9-b24e358740d1', 
+	    'Operador', 
+	    'oper@fuelcontrol.com', 
+	    '$2a$10$JFwfkqn3CH3zvuUC4M9VzuVBCpqrnCPE5Hi6JUz1LVeCrBvKlYZNa', 
+	    'OPERATOR'
+);
+
+-- Tanques
 insert into tank (id, name, fuel, tax, unit_price) values (1, 'TANQUE1', 'DIESEL', 13.0, 10.00);
 insert into tank (id, name, fuel, tax, unit_price) values (2, 'TANQUE2', 'GASOLINA', 13.0, 5.00);
 
+-- Bombas
 insert into pump (id, name, tank_id) values (1, 'BOMBA1', 1);							 
 insert into pump (id, name, tank_id) values (2, 'BOMBA2', 1);
 insert into pump (id, name, tank_id) values (3, 'BOMBA3', 2);
 insert into pump (id, name, tank_id) values (4, 'BOMBA4', 2);
 
+-- Abastecimentos
 insert into fueling (quantity, payment, taxation, pump_id, date) values (31, 155, 20.15, 1, '2023-11-02T00:00:00');
 insert into fueling (quantity, payment, taxation, pump_id, date) values (22, 110, 14.3,  2, '2023-11-02T00:00:00');
 --insert into fueling (quantity, payment, taxation, pump_id, date) values (22, 110, 14.3,  1, '2023-11-02T00:00:00');

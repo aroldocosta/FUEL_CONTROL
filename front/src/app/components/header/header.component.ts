@@ -9,6 +9,8 @@ import { LoginService } from 'src/app/services/login.service';
 import { PumpService } from 'src/app/services/pump.service';
 import { ReportService } from 'src/app/services/report.service';
 import { TankService } from 'src/app/services/tank.service';
+import { UserService } from 'src/app/services/user.service';
+import { CommonsComponent } from '../commons/commons.component';
 // import { UserService } from 'src/app/services/user.service';
 
 @Component({
@@ -16,36 +18,38 @@ import { TankService } from 'src/app/services/tank.service';
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.css']
 })
-export class HeaderComponent implements OnInit{
+export class HeaderComponent extends CommonsComponent implements OnInit{
  
   @Output() tankEvent   = new EventEmitter<Tank[]>();
   @Output() pumpEvent   = new EventEmitter<Pump[]>();
   @Output() reportEvent = new EventEmitter<any>();
-  logged: any = new User();
 
   constructor(
     private tankService: TankService,
     private pumpService: PumpService,
+    private userService: UserService,
     private reportService: ReportService,
+    private router: Router,
     private login: LoginService) {
+      super();
   }
 
   ngOnInit(): void {
     
     const userId = this.login.getAuthId();
 
-    // if(this.login.getAuthData() != null) {
-    //   this.userService.get(userId).subscribe({
-    //     next: user => {
-    //       this.logged = user;
-    //     },
-    //     error: err => {
-    //       this.login.setAuthData(null);
-    //     }
-    //   })
-    // } else {
-    //   this.login.setAuthData(null);
-    // }
+    if(this.login.getAuthData() != null) {
+      this.userService.get(userId).subscribe({
+        next: user => {
+          this.logged = user;
+        },
+        error: err => {
+          this.login.setAuthData(null);
+        }
+      })
+    } else {
+      this.login.setAuthData(null);
+    }
     this.logged.name = 'Usuario Teste';
   }
 
@@ -75,20 +79,20 @@ export class HeaderComponent implements OnInit{
     return this.login.getAuthToken();
   }
 
-  isAuthenticated() {
-    return !true;
+
+  override isAuthenticated() {
+    return this.login.isAuthenticated();
   }
 
   loginForm() {
-    // this.goToLink("/login", this.login, this.router);
+     this.goToLink("/login", this.login, this.router);
   }
 
   logout() {
-    // this.goToLink("/logout", this.login, this.router);
+     this.goToLink("/logout", this.login, this.router);
   }
 
   userData() {
-    //let url = "/users/data/" + this.logged.id;
-    // this.goToLink(url, this.login, this.router);
+
   }
 }
