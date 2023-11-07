@@ -25,7 +25,7 @@ public class PumpController {
 	@Autowired
 	private PumpService service;
 	
-	@GetMapping("")
+	@GetMapping()
 	@CrossOrigin(origins = "*", allowedHeaders = "*", methods = RequestMethod.GET)
 	public ResponseEntity<List<PumpDTO> > getAll() {
 		return service.getAll();

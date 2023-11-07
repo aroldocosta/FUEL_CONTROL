@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.studartrh.fuel.dto.FuelingDTO;
 import com.studartrh.fuel.dto.TotalsDTO;
 import com.studartrh.fuel.services.FuelingService;
+import com.studartrh.fuel.services.UserService;
 
 @RestController
 @RequestMapping("fuelings")
@@ -25,8 +26,8 @@ public class FuelingController {
 	
 	@Autowired
 	private FuelingService service;
-	
-	@GetMapping("")
+
+	@GetMapping()
 	@CrossOrigin(origins = "*", allowedHeaders = "*", methods = RequestMethod.GET)
 	public ResponseEntity<List<FuelingDTO> > getAll() {
 		return service.getAll();
@@ -35,19 +36,22 @@ public class FuelingController {
 	public ResponseEntity<FuelingDTO> get(@PathVariable("id") Long id) {     
 		return service.get(id);
 	}
-	@PostMapping(value = "")
-	@CrossOrigin(origins = "*", allowedHeaders = "*")
+	@PostMapping()
+	@CrossOrigin(origins = "*", allowedHeaders = "*", methods = RequestMethod.POST)
 	public ResponseEntity<FuelingDTO> save(@RequestBody FuelingDTO dto) {
 		return service.save(dto);
 	}
-	@PutMapping(value = "")
+	@PutMapping()
 	@CrossOrigin(origins = "*", allowedHeaders = "*", methods = RequestMethod.PUT)
 	public ResponseEntity<FuelingDTO> update(@RequestBody FuelingDTO dto) {
 		return service.update(dto);
 	}
-	@DeleteMapping(value = "/{id}")
+	@DeleteMapping(value = "{id}")
 	@CrossOrigin(origins = "*", allowedHeaders = "*", methods = RequestMethod.DELETE)
 	public ResponseEntity<FuelingDTO> delete(@PathVariable("id") Long id) {
+		
+		
+		
 		return service.delete(id);
 	}
 	

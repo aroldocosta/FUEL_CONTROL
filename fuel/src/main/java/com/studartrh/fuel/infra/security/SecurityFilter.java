@@ -1,6 +1,7 @@
 package com.studartrh.fuel.infra.security;
 
 import java.io.IOException;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -9,8 +10,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
-import com.studartrh.fuel.entity.User;
-import com.studartrh.fuel.enums.UserRole;
 import com.studartrh.fuel.repository.UserRepository;
 
 import jakarta.servlet.FilterChain;
@@ -37,27 +36,12 @@ public class SecurityFilter extends OncePerRequestFilter {
 			if(token != null) {
 				var login = tokenService.validateToken(token);
 				UserDetails user = userRepository.findByLogin(login);
-				
-				if(login == null) {
-					System.out.println("Usuario nulo");
-					UserDetails admin = userRepository.findByLogin("admin@fuelcontrol.com");
-					if(admin == null) {
-						User adminUser = new User("Admin", "admin@fuelcontrol.com", "87654321", UserRole.ADMIN);
-						userRepository.save(adminUser);
-					}
-					
-					UserDetails oper = userRepository.findByLogin("oper@fuelcontrol.com");
-					if(oper == null) {
-						User operUser = new User("Operador", "oper@fuelcontrol.com", "87654321", UserRole.OPERATOR);
-						userRepository.save(operUser);
-					}
-				}
-				
-				var authetication = new UsernamePasswordAuthenticationToken(user, null, user.getAuthorities());
-				SecurityContextHolder.getContext().setAuthentication(authetication);
+				var authentication = new UsernamePasswordAuthenticationToken(user, null, user.getAuthorities());
+				SecurityContextHolder.getContext().setAuthentication(authentication);
+				System.out.println("SecurityFilter.SUCCESS: " + authentication.getName() + " Authorities: " + authentication.getAuthorities().toString());
 			}			
 		} catch (Exception e) {
-			System.out.println("ERROR: " + e.getMessage());
+			System.out.println("SecurityFilter.ERROR: " + e.getMessage());
 		}
 		filterChain.doFilter(request, response);
 	}

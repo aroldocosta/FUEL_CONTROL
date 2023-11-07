@@ -23,7 +23,7 @@ public class UserController {
 	@Autowired
 	UserService service;
 	
-	@GetMapping(value = "")
+	@GetMapping()
 	@CrossOrigin(origins = "*", allowedHeaders = "*", methods = RequestMethod.GET)
 	public ResponseEntity<List<UserDTO> > getAll() { 
 		return service.getAll();
@@ -35,7 +35,7 @@ public class UserController {
 		return service.get(id);
 	}
 	
-	@PostMapping(value = "")
+	@PostMapping()
 	@CrossOrigin(origins = "*", allowedHeaders = "*", methods = RequestMethod.POST)
 	public ResponseEntity<UserDTO> save(@RequestBody UserDTO dto) {
 		return service.save(dto);

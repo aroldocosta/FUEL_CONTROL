@@ -20,7 +20,7 @@ public class TankController {
 	@Autowired
 	private TankService service;
 	
-	@GetMapping("")
+	@GetMapping()
 	@CrossOrigin(origins = "*", allowedHeaders = "*", methods = RequestMethod.GET)
 	ResponseEntity<List<TankDTO>> getAll() {
 		return service.getAll();
