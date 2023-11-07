@@ -40,7 +40,7 @@
 		<band height="114" splitType="Stretch">
 			<image>
 				<reportElement x="4" y="0" width="138" height="69" uuid="d47168ce-aae1-4efc-8d24-e15195025a5a"/>
-				<imageExpression><![CDATA["src/main/resources/logo.png"]]></imageExpression>
+				<imageExpression><![CDATA[getClass().getResourceAsStream("/logo.png")]]></imageExpression>
 			</image>
 			<staticText>
 				<reportElement style="Title" x="145" y="9" width="275" height="30" uuid="f49d68fd-a2c7-44ec-a5fc-9300d10c85a1"/>

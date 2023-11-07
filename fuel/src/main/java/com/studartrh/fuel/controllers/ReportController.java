@@ -1,7 +1,7 @@
 package com.studartrh.fuel.controllers;
 
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -34,7 +34,9 @@ public class ReportController {
 	@CrossOrigin(origins = "*", allowedHeaders = "*", methods = RequestMethod.GET)
 	public ResponseEntity<byte[]> generatePdf() throws FileNotFoundException, JRException {
 		JRBeanCollectionDataSource beanColletionDataSource = new JRBeanCollectionDataSource(service.reportAll());
-		JasperReport compileReport = JasperCompileManager.compileReport(new FileInputStream("src/main/resources/reports/report.jrxml"));
+
+		InputStream reportFile = getClass().getResourceAsStream("/reports/report.jrxml");
+		JasperReport compileReport = JasperCompileManager.compileReport(reportFile);
 		
 		Map<String, Object> map = new HashMap<>();
 		JasperPrint report = JasperFillManager.fillReport(compileReport, map, beanColletionDataSource);
