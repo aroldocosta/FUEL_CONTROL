@@ -17,6 +17,10 @@ Há dois usuários configurado
 para dara carga inicial no banco foi utilizado o arquivo data.sql que se encontra na pasta resources
 **FUEL_CONTROL/fuel/src/main/resources/**
 
+- Os preços unitários de cada produtos configurados em R$5,00 para gasolina e R$10 para diesel, para outros
+valores deve-se mudar o campo unitPrice do comando insert da tabela tanks
+
+
 ### Menus
 - **1 BOMBAS**: Exibe a lista de bombas cadastradas
 - **2 TANQUES**: Exibe a lista de tanques cadastrados
