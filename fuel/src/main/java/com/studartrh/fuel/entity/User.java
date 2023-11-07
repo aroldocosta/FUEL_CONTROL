@@ -115,6 +115,12 @@ public class User implements UserDetails {
 		User other = (User) obj;
 		return Objects.equals(id, other.id);
 	}
+	
+	@Override
+	public String toString() {
+		return "User [\n\tid=" + id + ", \n\tname=" + name + ", \n\tlogin=" + login + ", \n\tpassword=" + password + ", \n\trole=" + role
+				+ "]";
+	}
 
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
