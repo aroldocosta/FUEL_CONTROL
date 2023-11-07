@@ -45,17 +45,25 @@ export class HeaderComponent extends CommonsComponent implements OnInit{
         },
         error: err => {
           this.login.setAuthData(null);
+          this.goToLink('/login', this.login, this.router);
         }
       })
     } else {
       this.login.setAuthData(null);
+      this.goToLink('/login', this.login, this.router);
     }
-    this.logged.name = 'Usuario Teste';
   }
 
   requestPumps() {
-    this.pumpService.list().subscribe(list => {
-      this.pumpEvent.emit(list);
+    this.pumpService.list().subscribe({
+      next: list => {
+        debugger
+        this.pumpEvent.emit(list);
+      },
+      error: err => {
+        debugger
+        this.goToLink('/login', this.login, this.router);
+      }
     })
   }
 
