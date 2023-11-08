@@ -1,14 +1,15 @@
 # FUEL_CONTROL
 Projeto desafio para gerenciamento de abastecimento
 
-## Intruções
+## Instruções
 Há dois usuários configurado
 
-### Admin:
+### Usuários
+#### Admin:
 - **login**: admin@fuelcontrol.com
 - **senha**: 87654321
 
-### Operador:
+#### Operador:
 - **login**: oper@fuelcontrol.com
 - **senha**: 87654321
 
@@ -38,7 +39,14 @@ pasta **FUEL_CONTROL/front/src/environments** por meio da variável de ambiente 
   
 ### Frontend
  - Foram utilizados os frameworks Angular e Bootstrap
-     
+
+### Produção 
+- Pode ser acessada no endereço http://microlet.com.br:4201 com login do usuario _Admin_ ou _Operador_ (ver item Usuarios)     
+
+### Roles (Nivel de acesso)
+- Há dois níveis de acesso ADMIN e OPERATOR. As funcoes de **_Editar_**, **_Remover_** abastecimento e **_Baixar_** relatório estão disponiveis apenas para
+usuários com nível de acesso ADMIN. 
+
 ### Versões
 - **Java**: openjdk 17.0.8.1 2023-08-24
 - **Angular CLI**: 16.2.3
