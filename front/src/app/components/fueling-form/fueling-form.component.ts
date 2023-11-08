@@ -11,6 +11,7 @@ export class FuelingFormComponent {
   @Input() fuelingPayment: string = '';
 
   @Input() command: string = '';
+  @Input() message: string = '';
   @Input() pumpList: any = [];
   @Input() fuelingDate: string = '';
   @Input() fuelingPumpId: string = '';
@@ -20,6 +21,7 @@ export class FuelingFormComponent {
   @Output() quantityEvent = new EventEmitter<string>();
   @Output() dateEvent = new EventEmitter<string>();
   @Output() pumpIdEvent = new EventEmitter<string>()
+  @Output() clearEvent = new EventEmitter()
 
   constructor() {}
 
@@ -38,4 +40,10 @@ export class FuelingFormComponent {
   emitPumpIdEvent() {
     this.pumpIdEvent.emit(this.fuelingPumpId);
   }
+
+  emitClearMessage() {
+    this.clearEvent.emit();
+  }
+
+
 }

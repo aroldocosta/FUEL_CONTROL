@@ -128,7 +128,7 @@
 		  <button id="newCloseModalButton" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 		</div>
 		<div class="modal-body">
-				<app-fueling-form
+			<app-fueling-form
 				command = 'creating'
 				[pumpList] = 'pumpList'
 				[fuelingPumpId]  = 'fuelingPumpId'
@@ -153,6 +153,7 @@
 		<div class="modal-body">
 			<app-fueling-form
 				command = 'editing'
+				[message]="alertMessage"
 				[pumpList] = 'pumpList'
 				[fuelingDate] = 'fuelingDate'
 				[fuelingPumpId] = 'fuelingPumpId'
@@ -160,7 +161,8 @@
 				[fuelingQuantity] = 'fuelingQuantity'
 				(paymentEvent) = 'formatInputPayment($event)'
 				(quantityEvent) = 'formatInputQuantity($event)' 
-				(pumpIdEvent) = 'setFuelingPumpId($event)'
+				(pumpIdEvent) = 'setFuelingPumpId($event)'				
+				(clearEvent) = 'clearAlertMessage()'
 				(dateEvent) = 'setFuelingDate($event)'
 			></app-fueling-form>
 		</div>
@@ -178,7 +180,13 @@
 		  <button id="removeCloseModalButton" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 		</div>
 		<div class="modal-body">
+		<div class="table-responsive">
 			<h3 class="grey">Deseja remover o abastecimento {{removingId}}</h3>
+			<app-alert-message 
+				[message]="alertMessage"
+				(clearEvent)="clearAlertMessage()"
+			></app-alert-message>
+		</div>
 		</div>	
 		<div class="modal-footer">
 			<button class="btn btn-outline-primary btn-modal" (click)="confirmRemove()">REMOVER</button>

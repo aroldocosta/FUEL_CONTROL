@@ -18,7 +18,7 @@
           <a class="a-link nav-link px-2 text-secondary" data-bs-target="#tankModalToggle" data-bs-toggle="modal" (click)="requestTanks()">
             <i class="bi bi-droplet-half"></i> TANQUES</a>            
         </li>
-        <li class="nav-item">
+        <li class="nav-item" *ngIf="logged.role == 'ADMIN'">
           <a class="a-link nav-link px-2 text-secondary" (click)="requestReport()">
             <i class="bi bi-card-checklist"></i> RELATÓRIO</a>
         </li>

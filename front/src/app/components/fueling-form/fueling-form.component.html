@@ -47,5 +47,11 @@
             >
         </div>
     </div>
+    <div class="col-12" *ngIf="command == 'editing'">
+        <app-alert-message 
+            [message]="message"
+            (clearEvent)="emitClearMessage()"
+        ></app-alert-message>
+    </div>
 </div>
 <hr class="colorgraph">

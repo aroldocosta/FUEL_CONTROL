@@ -220,8 +220,12 @@ export class HomeComponent implements OnInit{
 
     this.fuelingService.update(fueling).subscribe({
       next: resp => {
-        document.getElementById("editCloseModalButton")?.click();
         this.list();
+        this.aside.requestTotals();
+        document.getElementById("editCloseModalButton")?.click();
+      },
+      error: err => {
+        this.alertMessage = "Ação não permitida, entre em contato com a gerência."
       }
     })
   }
@@ -231,12 +235,17 @@ export class HomeComponent implements OnInit{
   }
 
   confirmRemove() {
-    this.fuelingService.remove(this.removingId).subscribe(resp => {
-      this.list();
-      this.aside.requestTotals();
-      this.removingId = 0;
+    this.fuelingService.remove(this.removingId).subscribe({
+      next: resp => {
+        this.list();
+        this.aside.requestTotals();
+        this.removingId = 0;
+        document.getElementById("removeCloseModalButton")?.click();
+      },
+      error: err => {
+        this.alertMessage = "Ação não permitida, entre em contato com a gerência."
+      }
     })
-    document.getElementById("removeCloseModalButton")?.click();
   }
 
   home() {

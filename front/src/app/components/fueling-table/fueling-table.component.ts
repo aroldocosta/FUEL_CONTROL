@@ -8,6 +8,7 @@ import { Fueling } from 'src/app/model/fueling.model';
 })
 export class FuelingTableComponent {
 
+  //@Input()  message: string = '';
   @Input()  tableData: Fueling[] = [];
   @Output() newEvent = new EventEmitter<Fueling>();
   @Output() editEvent = new EventEmitter<Fueling>();

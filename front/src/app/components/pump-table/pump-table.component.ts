@@ -12,7 +12,7 @@ export class PumpTableComponent {
   @Input() list: Pump[] = [];
   @Input() message: string = '';
   @Output() showEvent = new EventEmitter();
-  @Output() clearEvent = new EventEmitter()
+  @Output() clearEvent = new EventEmitter();
  
 
   constructor() {
