@@ -35,6 +35,7 @@ export class HomeComponent implements OnInit{
   filteredDate: string = '';
   filteredTank: string = 'ALL';
   filteredPumps: Filtered[] = [];
+  removingId: any;
 
   constructor(
     private fuelingService: FuelingsService, 
@@ -226,15 +227,16 @@ export class HomeComponent implements OnInit{
   }
 
   remove(id: number) {
-    let resp = confirm('Confirma remover o abastecimento?');
+    this.removingId = id;
+  }
 
-    if(resp) {
-      this.fuelingService.remove(id).subscribe(resp => {
-        this.list();
-        this.aside.requestTotals();
-      })
-    }
-    document.getElementById("newCloseModalButton")?.click();
+  confirmRemove() {
+    this.fuelingService.remove(this.removingId).subscribe(resp => {
+      this.list();
+      this.aside.requestTotals();
+      this.removingId = 0;
+    })
+    document.getElementById("removeCloseModalButton")?.click();
   }
 
   home() {
