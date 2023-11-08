@@ -231,8 +231,11 @@ h6.info {
 	background: #0909090E;
 }
   
-.over-speed {
+.danger-icon {
  	color: red !important;
+	font-size: 3em;
+	margin-left: 0.2em;
+	margin-right: 0.6em;
  }
  
  textarea {

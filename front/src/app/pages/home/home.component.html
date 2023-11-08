@@ -181,7 +181,10 @@
 		</div>
 		<div class="modal-body">
 		<div class="table-responsive">
-			<h3 class="grey">Deseja remover o abastecimento {{removingId}}</h3>
+			<h3 class="grey">
+				<i class="bi bi-exclamation-diamond danger-icon"></i>
+				Deseja remover o abastecimento {{removingId}} ?
+			</h3>
 			<app-alert-message 
 				[message]="alertMessage"
 				(clearEvent)="clearAlertMessage()"
