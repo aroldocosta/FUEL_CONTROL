@@ -55,7 +55,7 @@ public class FuelingController {
 		return service.delete(id);
 	}
 	
-	@GetMapping("/totals")
+	@GetMapping(value = "/totals")
 	@CrossOrigin(origins = "*", allowedHeaders = "*", methods = RequestMethod.GET)
 	public ResponseEntity<TotalsDTO> getTotals() {
 		return service.totals();
