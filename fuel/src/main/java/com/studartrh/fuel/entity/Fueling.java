@@ -3,6 +3,7 @@ package com.studartrh.fuel.entity;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.Date;
+import java.util.Objects;
 
 import com.studartrh.fuel.dto.FuelingDTO;
 
@@ -187,6 +188,24 @@ public class Fueling {
 		LocalDateTime date = this.getLocalDateTime();
 		return ( now.getYear() == date.getYear());
 	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(date);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Fueling other = (Fueling) obj;
+		return Objects.equals(date, other.date);
+	}
+	
 	
 //	int counter = 0;
 //	for(FuelingDTO f : resp) {
