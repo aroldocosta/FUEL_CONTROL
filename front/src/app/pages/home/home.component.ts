@@ -84,10 +84,13 @@ export class HomeComponent implements OnInit{
   }
 
   setFilteredPump(index: number) {  
-      this.filteredPumps[index] = this.filteredPumps[index].checked
-            ? this.filteredPumps[index] = {pumpName: 'BOMBAXX', checked: false }
-            : this.filteredPumps[index] = {pumpName: 'BOMBA' + String(index + 1) , checked: true };
-      this.filterFueling();
+    debugger 
+    let pumpId = 'BOMBA'+(index+1);
+    let dumbId = 'DUMB';
+    this.filteredPumps[index] = this.filteredPumps[index].checked
+          ? this.filteredPumps[index] = new Filtered(dumbId, false)
+          : this.filteredPumps[index] = new Filtered(pumpId, true);
+    this.filterFueling();
   }
 
   isFilteredDate(date: string) {    
